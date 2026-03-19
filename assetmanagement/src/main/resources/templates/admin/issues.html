@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Issues</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h2>All Issues</h2>
+
+<a href="/admin/dashboard">Back</a> |
+<a href="/logout">Logout</a>
+
+<hr>
+
+<p th:if="${#lists.isEmpty(issues)}">No Issues Found</p>
+
+<ul>
+    <li th:each="i : ${issues}">
+        <b th:text="${i.description}"></b><br>
+        Type: <span th:text="${i.type}"></span><br>
+        Status: <span th:text="${i.status}"></span><br>
+        Employee: <span th:text="${i.userId}"></span>
+        <hr>
+    </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Report Issue</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h2>Report Issue</h2>
+
+<form action="/employee/report-issue" method="post">
+
+    <label>Description:</label>
+    <input type="text" name="description"><br><br>
+
+    <label>Issue Type:</label>
+    <select name="type">
+        <option value="HARDWARE">Hardware</option>
+        <option value="SOFTWARE">Software</option>
+        <option value="NETWORK">Network</option>
+    </select><br><br>
+
+    <button type="submit">Submit Issue</button>
+</form>
+
+<br>
+<a href="/employee/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

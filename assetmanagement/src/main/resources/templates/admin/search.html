@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search User</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h2>Search User</h2>
+
+<form action="/admin/search-user" method="post">
+    <label>Enter Employee ID:</label>
+    <input type="text" name="userId">
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+<!-- Show User Data -->
+<div th:if="${user != null}">
+    <h3>User Details</h3>
+
+    <p>Name: <span th:text="${user.name}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <p>Role: <span th:text="${user.role}"></span></p>
+    <p>Employee ID: <span th:text="${user.employeeId}"></span></p>
+</div>
+
+<!-- Error Message -->
+<p style="color:red;" th:if="${error}" th:text="${error}"></p>
+
+<br>
+<a href="/admin/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

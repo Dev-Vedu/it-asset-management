@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Worker Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h2>Worker Dashboard</h2>
+
+<div>
+    <a href="/worker/profile">Profile</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+
+<h3>Assigned Issues</h3>
+
+<p th:if="${#lists.isEmpty(issues)}">No Issues Assigned</p>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="i : ${issues}">
+        <td th:text="${i.description}"></td>
+        <td th:text="${i.type}"></td>
+        <td th:text="${i.status}"></td>
+        <td>
+            <a th:href="@{'/worker/update/' + ${i.id}}">
+                Mark as Resolved
+            </a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

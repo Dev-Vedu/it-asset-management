@@ -1,0 +1,15 @@
+<h2>Employee Dashboard</h2>
+
+<p>Name: <span th:text="${user.name}"></span></p>
+<a href="/employee/report-issue">Report Issue</a>
+<a href="/employee/profile">Profile</a>
+
+<a href="/logout">Logout</a>
+<p th:if="${#lists.isEmpty(assets)}">No Assets Assigned</p>
+
+<h3>Your Assets</h3>
+<ul>
+    <li th:each="a : ${assets}">
+        <span th:text="${a.name}"></span>
+    </li>
+</ul>

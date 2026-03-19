@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<div>
+    <a href="/admin/add-asset">Add Asset</a> |
+    <a href="/admin/add-user">Add User</a> |
+    <a href="/admin/search-user">Search User</a> |
+    <a href="/admin/issues">View Issues</a>
+    <a href="/admin/profile">Profile</a>
+
+    <a href="/logout">Logout</a>
+</div>
+
+<hr>
+
+<h3>All Assets</h3>
+
+<p th:if="${#lists.isEmpty(assets)}">No Assets Available</p>
+
+<ul>
+    <li th:each="a : ${assets}">
+        <b th:text="${a.name}"></b>
+        (Serial: <span th:text="${a.serialNumber}"></span>) -
+        Assigned To: <span th:text="${a.assignedTo}"></span>
+    </li>
+</ul>
+
+</body>
+</html>
