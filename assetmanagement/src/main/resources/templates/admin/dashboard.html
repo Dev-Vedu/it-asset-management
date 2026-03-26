@@ -2,35 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="/admin/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/admin/add-asset">Add Asset</a></li>
+            <li><a href="/admin/add-user">Add User</a></li>
+            <li><a href="/admin/search-user">Search User</a></li>
+            <li><a href="/admin/issues">View Issues</a></li>
+            <li><a href="/admin/profile">Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </nav>
 
-<h2>Admin Dashboard</h2>
+    <main class="main-content">
+        <header>
+            <h2>Admin Dashboard</h2>
+        </header>
 
-<div>
-    <a href="/admin/add-asset">Add Asset</a> |
-    <a href="/admin/add-user">Add User</a> |
-    <a href="/admin/search-user">Search User</a> |
-    <a href="/admin/issues">View Issues</a>
-    <a href="/admin/profile">Profile</a>
+        <section class="content-body">
+            <h3>All Assets</h3>
+            <p th:if="${#lists.isEmpty(assets)}" class="empty-state">No Assets Available</p>
 
-    <a href="/logout">Logout</a>
+            <div class="asset-grid">
+                <div th:each="a : ${assets}" class="asset-card">
+                    <b th:text="${a.name}"></b>
+                    <p>Serial: <span th:text="${a.serialNumber}"></span></p>
+                    <p class="assigned">Assigned: <span th:text="${a.assignedTo}"></span></p>
+                </div>
+            </div>
+        </section>
+    </main>
 </div>
-
-<hr>
-
-<h3>All Assets</h3>
-
-<p th:if="${#lists.isEmpty(assets)}">No Assets Available</p>
-
-<ul>
-    <li th:each="a : ${assets}">
-        <b th:text="${a.name}"></b>
-        (Serial: <span th:text="${a.serialNumber}"></span>) -
-        Assigned To: <span th:text="${a.assignedTo}"></span>
-    </li>
-</ul>
-
 </body>
 </html>

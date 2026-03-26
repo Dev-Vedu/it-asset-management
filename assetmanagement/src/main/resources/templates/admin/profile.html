@@ -1,19 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Profile</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile | Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #a855f7;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --white: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Matching Animated Mesh Background */
+            background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%);
+            background-color: #f8fafc;
+        }
+
+        .profile-card {
+            background: var(--white);
+            backdrop-filter: blur(15px);
+            width: 100%;
+            max-width: 400px;
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            text-align: center;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Profile Avatar Placeholder */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.6rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: rgba(241, 245, 249, 0.5);
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item:last-child { margin-bottom: 0; }
+
+        .label {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .value {
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Action Links */
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .actions a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back {
+            background: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-logout {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .btn-logout:hover {
+            background: #fee2e2;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Admin Profile</h2>
+<div class="profile-card">
+    <div class="avatar">A</div>
+    <h2>Admin Profile</h2>
+    <div class="role-badge">ADMINISTRATOR</div>
 
-<p><b>Email:</b> admin@gmail.com</p>
-<p><b>Role:</b> ADMIN</p>
+    <div class="info-box">
+        <div class="info-item">
+            <span class="label">Email:</span>
+            <span class="value">admin@gmail.com</span>
+        </div>
+        <div class="info-item">
+            <span class="label">System Status:</span>
+            <span class="value" style="color: #10b981;">Active</span>
+        </div>
+    </div>
 
-<br>
-<a href="/admin/dashboard">Back</a> |
-<a href="/logout">Logout</a>
+    <div class="actions">
+        <a href="/admin/dashboard" class="btn-back">← Back</a>
+        <a href="/logout" class="btn-logout">Logout</a>
+    </div>
+</div>
 
 </body>
 </html>
