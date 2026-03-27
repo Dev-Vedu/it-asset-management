@@ -1,8 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+    <style>
+        /* 1. Force the main container to allow full width */
+.main-content {
+    margin-left: 240px;
+    padding: 40px;
+    width: calc(100% - 240px); /* Fill the rest of the screen */
+    display: block;
+}
+
+/* 2. Make the table wrapper stretch */
+.table-wrapper {
+    width: 100% !important;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* 3. Make the table itself stretch */
+.styled-table {
+    width: 100% !important; /* This is the fix for 'small' columns */
+    border-collapse: collapse;
+}
+
+/* 4. Add padding so the Serial Number has 'room' */
+.styled-table th,
+.styled-table td {
+    padding: 20px 24px; /* Increases the 'size' of the cells */
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* 5. Center the number column */
+.styled-table td:first-child {
+    text-align: center;
+    color: #94a3b8;
+    font-weight: 600;
+}
+    </style>
 </head>
 <body>
 <div class="dashboard-container">
@@ -24,18 +65,31 @@
     <main class="main-content">
         <header>
             <h2>Admin Dashboard</h2>
+            <p>Records in collection</p>
         </header>
 
         <section class="content-body">
-            <h3>All Assets</h3>
-            <p th:if="${#lists.isEmpty(assets)}" class="empty-state">No Assets Available</p>
-
-            <div class="asset-grid">
-                <div th:each="a : ${assets}" class="asset-card">
-                    <b th:text="${a.name}"></b>
-                    <p>Serial: <span th:text="${a.serialNumber}"></span></p>
-                    <p class="assigned">Assigned: <span th:text="${a.assignedTo}"></span></p>
-                </div>
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>Assets Name</th>
+                        <th>Serial Number</th>
+                        <th>Assigned To</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="a, stat : ${assets}">
+                        <td th:text="${stat.count}">1</td>
+                        <td class="font-bold" th:text="${a.name}">HP laptop</td>
+                        <td th:text="${a.serialNumber}">12345</td>
+                        <td th:text="${a.assignedTo}">123</td>
+                        <td>27/03/2026</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
