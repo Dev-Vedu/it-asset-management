@@ -1,0 +1,116 @@
+/* --- Use the same variables from your Admin reference --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #6366f1;
+    --sidebar-bg: #0f172a;
+    --main-bg: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --sidebar-width: 260px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-main);
+}
+
+.dashboard-container { display: flex; }
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo {
+    padding: 2.5rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+.nav-links li a {
+    display: block;
+    padding: 1rem 2rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+}
+
+.nav-links li a.active, .nav-links li a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--primary);
+}
+
+/* --- Main Content (Full Width Fix) --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 3rem;
+    width: calc(100% - var(--sidebar-width));
+    box-sizing: border-box;
+}
+
+header h2 { font-size: 2.2rem; font-weight: 800; margin: 0; }
+header p { color: var(--text-muted); margin-top: 5px; }
+
+/* --- Styled Table (All Size) --- */
+.table-wrapper {
+    width: 100%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-top: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.styled-table {
+    width: 100% !important; /* Forces full width */
+    border-collapse: collapse;
+}
+
+.styled-table th, .styled-table td {
+    padding: 20px 24px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.styled-table th { background: #fafafa; font-weight: 700; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+
+.font-bold { font-weight: 600; color: var(--text-main); }
+
+/* --- Action Link / Button --- */
+.btn-resolve {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.btn-resolve:hover { text-decoration: underline; }
+
+.status-pill {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.sidebar-footer { padding: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.logout-link { color: #f87171; text-decoration: none; font-weight: 600; font-size: 0.9rem; }

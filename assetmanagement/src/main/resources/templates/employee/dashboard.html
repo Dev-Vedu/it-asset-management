@@ -1,15 +1,56 @@
-<h2>Employee Dashboard</h2>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/employee.css}">
+</head>
+<body>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo">Employee Panel</div>
+        <ul class="nav-links">
+            <li><a href="/employee/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/employee/report-issue">Report Issue</a></li>
+            <li><a href="/employee/profile">Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </nav>
 
-<p>Name: <span th:text="${user.name}"></span></p>
-<a href="/employee/report-issue">Report Issue</a>
-<a href="/employee/profile">Profile</a>
+    <main class="main-content">
+        <header>
+            <h2>Employee Dashboard</h2>
+            <p>Welcome, <span class="user-name" th:text="${user.name}"></span></p>
+        </header>
 
-<a href="/logout">Logout</a>
-<p th:if="${#lists.isEmpty(assets)}">No Assets Assigned</p>
+        <section class="content-body">
 
-<h3>Your Assets</h3>
-<ul>
-    <li th:each="a : ${assets}">
-        <span th:text="${a.name}"></span>
-    </li>
-</ul>
+            <p th:if="${#lists.isEmpty(assets)}" class="empty-state">No Assets Assigned</p>
+
+            <h3 th:if="${not #lists.isEmpty(assets)}">Your Assets</h3>
+
+            <div class="table-wrapper" th:if="${not #lists.isEmpty(assets)}">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>Asset Name</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="a, stat : ${assets}">
+                        <td th:text="${stat.count}">1</td>
+                        <td class="font-bold" th:text="${a.name}">Asset Name</td>
+                        <td><span class="status-badge">Assigned</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Worker Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/worker.css}">
 </head>
 <body>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo">Worker Panel</div>
+        <ul class="nav-links">
+            <li><a href="/worker/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/worker/profile">Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </nav>
 
-<h2>Worker Dashboard</h2>
+    <main class="main-content">
+        <header>
+            <h2>Worker Dashboard</h2>
+            <p>Assigned Issues & Tasks</p>
+        </header>
 
-<div>
-    <a href="/worker/profile">Profile</a> |
-    <a href="/logout">Logout</a>
+        <section class="content-body">
+            <div class="table-wrapper">
+                <p th:if="${#lists.isEmpty(issues)}" class="empty-state"> No Issues Assigned</p>
+
+                <table class="styled-table" th:if="${not #lists.isEmpty(issues)}">
+                    <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="i, stat : ${issues}">
+                        <td th:text="${stat.count}">1</td>
+                        <td class="font-bold" th:text="${i.description}">Issue description</td>
+                        <td th:text="${i.type}">Hardware</td>
+                        <td>
+                            <span class="status-pill" th:text="${i.status}">Pending</span>
+                        </td>
+                        <td>
+                            <a th:href="@{'/worker/update/' + ${i.id}}" class="btn-resolve">
+                                Mark as Resolved
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 </div>
-
-<hr>
-
-<h3>Assigned Issues</h3>
-
-<p th:if="${#lists.isEmpty(issues)}">No Issues Assigned</p>
-
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
-
-    <tr th:each="i : ${issues}">
-        <td th:text="${i.description}"></td>
-        <td th:text="${i.type}"></td>
-        <td th:text="${i.status}"></td>
-        <td>
-            <a th:href="@{'/worker/update/' + ${i.id}}">
-                Mark as Resolved
-            </a>
-        </td>
-    </tr>
-</table>
-
 </body>
 </html>
