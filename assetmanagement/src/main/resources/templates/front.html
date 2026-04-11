@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asset Management</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: linear-gradient(to right, #4c1d95, #6366f1);
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .nav-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .login-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            background: white;
+            color: #4c1d95;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 80px;
+        }
+
+        .hero-text {
+            max-width: 520px;
+        }
+
+        .hero-text h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        .hero-text p {
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons button {
+            padding: 12px 22px;
+            border-radius: 10px;
+            border: none;
+            margin-right: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .demo-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .free-btn {
+            background: linear-gradient(to right, #6366f1, #a855f7);
+            color: white;
+        }
+
+        .hero-buttons button:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        .hero img {
+            width: 420px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 70px;
+            text-align: center;
+        }
+
+        .features h2 {
+            margin-bottom: 50px;
+            font-size: 28px;
+        }
+
+        .feature-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            width: 260px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero img {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">AssetPro</div>
+
+    <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">Solutions</a>
+        <a href="#">Pricing</a>
+    </div>
+
+    <button class="login-btn" th:onclick="|window.location.href='@{/login}'|">
+        Login
+    </button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>The smarter way to manage your assets</h1>
+        <p>Track, manage and monitor all your company assets easily with a powerful and modern system.</p>
+
+        <div class="hero-buttons">
+            <button class="demo-btn">Book Demo</button>
+            <button class="free-btn">Free Trial</button>
+        </div>
+    </div>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <h2>Why Choose Us</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Easy Tracking</h3>
+            <p>Track assets in real time with ease.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Secure Data</h3>
+            <p>Your data is safe and protected.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Fast Reports</h3>
+            <p>Generate reports instantly.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 AssetPro | All Rights Reserved
+</div>
+
+</body>
+</html>

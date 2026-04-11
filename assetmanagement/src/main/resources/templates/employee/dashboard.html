@@ -3,48 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/employee.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sidebar-bg: #0f172a;
+            --primary-blue: #3b82f6;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            height: 100vh;
+            position: fixed;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 30px 30px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 14px 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .sidebar-footer { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .logout-link { color: #f87171; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+            width: calc(100% - 260px);
+        }
+
+        /* Rounded Header Container (Matches Image 3 & 5) */
+        .dashboard-header {
+            background: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-header h2 { margin: 0; color: var(--sidebar-bg); font-weight: 700; font-size: 24px; }
+        .dashboard-header p { margin: 4px 0 0; font-size: 14px; color: var(--text-muted); }
+
+        /* --- STAT CARDS --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .stat-card span { display: block; color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .stat-card h3 { margin: 10px 0 0; font-size: 26px; font-weight: 700; color: var(--sidebar-bg); }
+
+        /* --- TABLE --- */
+        .table-wrapper {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-table { width: 100%; border-collapse: collapse; }
+        .styled-table th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            padding: 18px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table td { padding: 18px 24px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .styled-table tbody tr:hover { background-color: #f1f5f9; }
+
+        .asset-name { font-weight: 600; color: var(--sidebar-bg); }
+        .status-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+        }
+    </style>
 </head>
 <body>
+
 <div class="dashboard-container">
     <nav class="sidebar">
-        <div class="logo">Employee Panel</div>
+        <div class="logo"><i class="fas fa-user-circle"></i> Employee Panel</div>
         <ul class="nav-links">
-            <li><a href="/employee/dashboard" class="active">Dashboard</a></li>
-            <li><a href="/employee/report-issue">Report Issue</a></li>
-            <li><a href="/employee/profile">Profile</a></li>
+            <li><a href="/employee/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/employee/report-issue"><i class="fas fa-exclamation-circle"></i> Report Issue</a></li>
+            <li><a href="/employee/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
-            <a href="/logout" class="logout-link">Logout</a>
+            <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
 
     <main class="main-content">
-        <header>
+        <header class="dashboard-header">
             <h2>Employee Dashboard</h2>
-            <p>Welcome, <span class="user-name" th:text="${user.name}"></span></p>
+            <p>Welcome, <span th:text="${user.name}">User</span> </p>
         </header>
 
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span>Your Assets</span>
+                <h3 th:text="${#lists.size(assets)}">0</h3>
+            </div>
+            <div class="stat-card">
+                <span>Active Issues</span>
+                <h3>0</h3>
+            </div>
+        </section>
+
         <section class="content-body">
-
-            <p th:if="${#lists.isEmpty(assets)}" class="empty-state">No Assets Assigned</p>
-
-            <h3 th:if="${not #lists.isEmpty(assets)}">Your Assets</h3>
-
-            <div class="table-wrapper" th:if="${not #lists.isEmpty(assets)}">
+            <div class="table-wrapper">
                 <table class="styled-table">
                     <thead>
                     <tr>
                         <th style="width: 50px;">#</th>
                         <th>Asset Name</th>
-                        <th>Status</th>
+                        <th style="text-align: right;">Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="a, stat : ${assets}">
-                        <td th:text="${stat.count}">1</td>
-                        <td class="font-bold" th:text="${a.name}">Asset Name</td>
-                        <td><span class="status-badge">Assigned</span></td>
+                        <td style="color: #94a3b8;" th:text="${stat.count}">1</td>
+                        <td><span class="asset-name" th:text="${a.name}">Asset Name</span></td>
+                        <td style="text-align: right;"><span class="status-badge">Assigned</span></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(assets)}">
+                        <td colspan="3" class="empty-state">
+                            <i class="fas fa-folder-open" style="font-size: 24px; display: block; margin-bottom: 10px;"></i>
+                            No assets currently assigned to you.
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -52,5 +214,6 @@
         </section>
     </main>
 </div>
+
 </body>
 </html>
