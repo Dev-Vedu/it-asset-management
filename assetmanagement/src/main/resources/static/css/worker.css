@@ -1,21 +1,23 @@
-/* --- Use the same variables from your Admin reference --- */
+/* --- Root Variables (Updated to Lavender, White, & Purple) --- */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --primary: #6366f1;
-    --sidebar-bg: #0f172a;
-    --main-bg: #f8fafc;
-    --text-main: #1e293b;
+    --primary: #8b5cf6;           /* Vibrant Purple */
+    --primary-hover: #7c3aed;
+    --bg-lavender: #F3E8FF;       /* Your New Background */
+    --sidebar-bg: #000000;        /* Keep Sidebar Black for Contrast */
+    --card-bg: #ffffff;           /* White Content Cards */
+    --text-main: #0f172a;         /* Dark text */
     --text-muted: #64748b;
     --sidebar-width: 260px;
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--main-bg);
-    color: var(--text-main);
+    background-color: var(--bg-lavender);
+    color: var(--text-main); /* Text is now dark by default */
 }
 
 .dashboard-container { display: flex; }
@@ -28,6 +30,7 @@ body {
     position: fixed;
     display: flex;
     flex-direction: column;
+    border-right: 2px solid #000000; /* Defined Sidebar Border */
 }
 
 .sidebar .logo {
@@ -35,82 +38,80 @@ body {
     font-size: 1.4rem;
     font-weight: 800;
     text-transform: uppercase;
-    background: linear-gradient(to right, #818cf8, #c084fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary);
 }
 
-.nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
 .nav-links li a {
-    display: block;
-    padding: 1rem 2rem;
     color: #94a3b8;
-    text-decoration: none;
-    font-weight: 500;
     border-left: 4px solid transparent;
 }
 
 .nav-links li a.active, .nav-links li a:hover {
     color: white;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(139, 92, 246, 0.1);
     border-left-color: var(--primary);
 }
 
-/* --- Main Content (Full Width Fix) --- */
+/* --- Main Content Area --- */
 .main-content {
     margin-left: var(--sidebar-width);
-    padding: 3rem;
+    padding: 3.5rem;
     width: calc(100% - var(--sidebar-width));
-    box-sizing: border-box;
 }
 
-header h2 { font-size: 2.2rem; font-weight: 800; margin: 0; }
-header p { color: var(--text-muted); margin-top: 5px; }
+header h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-main); /* Dark Header */
+}
 
-/* --- Styled Table (All Size) --- */
+header p { color: var(--text-muted); }
+
+/* --- Task Table Content Box (With Black Border) --- */
 .table-wrapper {
     width: 100%;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    margin-top: 30px;
+    background: var(--card-bg);
+    border-radius: 28px;
+    border: 2px solid #000000; /* Added Black Border */
+    margin-top: 40px;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.1);
 }
 
-.styled-table {
-    width: 100% !important; /* Forces full width */
-    border-collapse: collapse;
+.styled-table th {
+    background: #f8fafc;
+    font-weight: 800;
+    color: #000; /* Black Header Text */
+    text-transform: uppercase;
+    padding: 24px;
+    border-bottom: 2px solid #000; /* Border under header */
 }
 
-.styled-table th, .styled-table td {
+.styled-table td {
     padding: 20px 24px;
-    text-align: left;
     border-bottom: 1px solid #f1f5f9;
+    font-weight: 600;
 }
 
-.styled-table th { background: #fafafa; font-weight: 700; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
-
-.font-bold { font-weight: 600; color: var(--text-main); }
-
-/* --- Action Link / Button --- */
+/* --- Resolve Action --- */
 .btn-resolve {
-    text-decoration: none;
     color: var(--primary);
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-weight: 800;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    transition: var(--transition);
 }
 
-.btn-resolve:hover { text-decoration: underline; }
+.btn-resolve:hover {
+    border-color: #000; /* Border on hover for links */
+    border-radius: 8px;
+}
 
 .status-pill {
-    background: #fef3c7;
-    color: #92400e;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--primary);
+    border: 1px solid #000; /* Small Black Border for pill */
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 800;
 }
-
-.sidebar-footer { padding: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
-.logout-link { color: #f87171; text-decoration: none; font-weight: 600; font-size: 0.9rem; }

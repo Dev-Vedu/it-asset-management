@@ -2,182 +2,115 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Profile | Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-    --primary: #6366f1;
-    --accent: #a855f7;
-    --bg-color: #f8fafc;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --white: rgba(255, 255, 255, 0.9);
-}
+            --primary: #8b5cf6;
+            --bg-lavender: #F3E8FF;
+            --white: #ffffff;
+            --text-main: #0f172a;
+        }
 
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* Premium Animated Mesh Background */
-    background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%);
-    background-color: #f8fafc;
-}
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-lavender);
+        }
 
-.profile-card {
-    background: var(--white);
-    backdrop-filter: blur(15px);
-    width: 90%;
-    max-width: 400px;
-    padding: 3rem 2rem;
-    border-radius: 30px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    text-align: center;
-    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+        .profile-card {
+            background: var(--white);
+            width: 90%;
+            max-width: 400px;
+            padding: 4rem 2.5rem;
+            border-radius: 35px;
+            border: 2px solid #000000; /* Added Black Border */
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.12);
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
 
-@keyframes popIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            border: 2px solid #000; /* Added Black Border */
+        }
 
-.avatar {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: 50%;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 700;
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-    text-transform: uppercase;
-}
+        .role-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            border: 1px solid #000; /* Small Black Border */
+        }
 
-h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.6rem;
-    color: var(--text-main);
-    font-weight: 800;
-}
+        .info-box {
+            background: #f8fafc;
+            padding: 1.8rem;
+            border-radius: 24px;
+            margin-bottom: 2.5rem;
+            text-align: left;
+            border: 1px solid #000; /* Added Black Border */
+        }
 
-.role-badge {
-    display: inline-block;
-    background: #e0e7ff;
-    color: #4338ca;
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-}
+        .btn-logout {
+            background: #000;
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            flex: 1;
+        }
 
-.info-box {
-    background: rgba(241, 245, 249, 0.5);
-    padding: 1.5rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    text-align: left;
-    border: 1px solid #e2e8f0;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column; /* Stacked for better readability on mobile */
-    margin-bottom: 1rem;
-}
-
-.info-item:last-child { margin-bottom: 0; }
-
-.label {
-    font-weight: 600;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-}
-
-.value {
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 1rem;
-    word-break: break-all;
-}
-
-.actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.actions a {
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.8rem 1.5rem;
-    border-radius: 14px;
-    transition: all 0.3s ease;
-}
-
-.btn-back {
-    background: #f1f5f9;
-    color: var(--text-main);
-}
-
-.btn-back:hover {
-    background: #e2e8f0;
-    transform: translateX(-5px);
-}
-
-.btn-logout {
-    background: #fef2f2;
-    color: #ef4444;
-}
-
-.btn-logout:hover {
-    background: #fee2e2;
-}
+        .btn-back {
+            background: #f1f5f9;
+            color: #000;
+            border: 2px solid #000;
+            padding: 0.9rem 1.8rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            flex: 1;
+        }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
-
 <div class="profile-card">
-    <div class="avatar" th:text="${user.name.substring(0,1)}">E</div>
-
-    <h2 th:text="${user.name}">Employee Name</h2>
-    <div class="role-badge" th:text="${user.role}">ROLE</div>
-
+    <div class="avatar" th:text="${user != null and user.name != null} ? ${user.name.substring(0,1).toUpperCase()} : 'E'">E</div>
+    <h2 th:text="${user.name}" style="color: #000; font-weight: 800;">Employee Name</h2>
+    <div class="role-badge" th:text="${user.role}">Employee</div>
     <div class="info-box">
-        <div class="info-item">
-            <span class="label">Email:</span>
-            <span class="value" th:text="${user.email}">email@example.com</span>
+        <div style="margin-bottom: 15px;">
+            <small style="text-transform: uppercase; font-weight: 800; color: #64748b;">Email Address</small><br>
+            <b th:text="${user.email}">email@example.com</b>
         </div>
-        <div class="info-item">
-            <span class="label">Employee ID:</span>
-            <span class="value" th:text="${user.employeeId}">EMP-001</span>
-        </div>
-        <div class="info-item">
-            <span class="label">Account Status:</span>
-            <span class="value" style="color: #10b981;">● Active</span>
+        <div>
+            <small style="text-transform: uppercase; font-weight: 800; color: #64748b;">Employee ID</small><br>
+            <b th:text="${user.employeeId}">EMP-001</b>
         </div>
     </div>
-
-    <div class="actions">
-        <a href="/employee/dashboard" class="btn-back">&larr; Back</a>
+    <div style="display: flex; gap: 10px;">
+        <a href="/employee/dashboard" class="btn-back">← Back</a>
         <a href="/logout" class="btn-logout">Logout</a>
     </div>
 </div>
-
 </body>
 </html>

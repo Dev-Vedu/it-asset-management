@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User | Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
             --primary-glow: rgba(99, 102, 241, 0.4);
             --accent: #a855f7;
-            --bg-color: #f8fafc;
+            --bg-lavender: #F3E8FF;
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
@@ -23,35 +23,36 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Animated Mesh Background to match Add Asset */
-            background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
-                        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                        radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
-            background-color: #f8fafc;
+            background-color: var(--bg-lavender);
         }
 
         .user-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
+            background: #ffffff;
             padding: 2.5rem;
             border-radius: 24px;
+            /* Applied solid black border as requested */
+            border: 2px solid #000000;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
             width: 100%;
             max-width: 550px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
             animation: fadeIn 0.7s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
             margin: 0 0 0.5rem 0;
             font-size: 1.8rem;
-            font-weight: 700;
+            font-weight: 800;
             background: linear-gradient(to right, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -63,9 +64,9 @@
             color: var(--text-muted);
             margin-bottom: 2rem;
             font-size: 0.9rem;
+            font-weight: 500;
         }
 
-        /* Form Layout Grid */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -83,14 +84,15 @@
         label {
             display: block;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 0.5rem;
-            color: var(--text-main);
+            color: #000000;
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 0.8rem 1rem;
             border: 2px solid #f1f5f9;
@@ -98,10 +100,12 @@
             font-size: 0.95rem;
             box-sizing: border-box;
             background-color: #f8fafc;
+            font-family: inherit;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: var(--primary);
             background-color: #fff;
@@ -117,7 +121,7 @@
             border: none;
             border-radius: 12px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
@@ -135,8 +139,9 @@
             text-align: center;
             margin-top: 1.5rem;
             text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 700;
             transition: color 0.2s;
         }
 
@@ -144,11 +149,16 @@
             color: var(--primary);
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            button { grid-column: span 1; }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            button {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
