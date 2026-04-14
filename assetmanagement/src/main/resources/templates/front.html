@@ -2,15 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Asset Management</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssetPro | Modern IT Asset Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        :root {
+            /* Palette strictly from image_0df2e5.jpg */
+            --primary: #9d4edd;
+            --primary-glow: rgba(157, 78, 221, 0.6);
+            --bg-void: #000000; /* True Black */
+            --bg-dark: #050110; /* Deepest Purple/Black */
+            --bg-card: #0b021d;
+            --gradient-purple: linear-gradient(135deg, #7b2cbf 0%, #9d4edd 100%);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
         /* NAVBAR */
@@ -18,226 +33,191 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
-            background: linear-gradient(to right, #4c1d95, #6366f1);
-            color: white;
+            padding: 20px 80px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(157, 78, 221, 0.2);
         }
 
         .logo {
-            font-weight: 700;
-            font-size: 22px;
+            font-weight: 800;
+            font-size: 24px;
+            text-shadow: 0 0 15px var(--primary-glow);
         }
 
         .nav-links a {
-            color: white;
-            margin: 0 15px;
+            color: var(--text-muted);
+            margin: 0 20px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            opacity: 0.7;
-        }
+        .nav-links a:hover { color: var(--primary); }
 
-        .login-btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            background: white;
-            color: #4c1d95;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* HERO */
+        /* HERO - Incorporating the Black/Purple Diagonal Split */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 80px 80px;
+            padding: 120px 80px;
+            position: relative;
+            /* This mimics the diagonal split from image_0df2e5.jpg */
+            background: linear-gradient(110deg, #7b2cbf 45%, #000000 45.1%);
+            min-height: 70vh;
         }
 
         .hero-text {
-            max-width: 520px;
+            max-width: 550px;
+            z-index: 2;
         }
 
         .hero-text h1 {
-            font-size: 44px;
-            margin-bottom: 20px;
-            color: #1e293b;
+            font-size: 64px;
+            line-height: 1;
+            margin-bottom: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
         .hero-text p {
-            color: #64748b;
-            margin-bottom: 25px;
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 35px;
             line-height: 1.6;
         }
 
-        .hero-buttons button {
-            padding: 12px 22px;
-            border-radius: 10px;
+        .hero-buttons { display: flex; gap: 15px; }
+
+        .btn {
+            padding: 16px 35px;
+            border-radius: 50px; /* Rounded pill like login button */
             border: none;
-            margin-right: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 800;
+            text-transform: uppercase;
             transition: 0.3s;
         }
 
-        .demo-btn {
-            background: #10b981;
+        .btn-primary {
+            background: var(--gradient-purple);
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
             color: white;
         }
 
-        .free-btn {
-            background: linear-gradient(to right, #6366f1, #a855f7);
-            color: white;
-        }
+        .btn:hover { transform: scale(1.05); }
 
-        .hero-buttons button:hover {
-            transform: translateY(-3px);
-            opacity: 0.9;
-        }
 
-        .hero img {
-            width: 420px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .hero-img {
+            width: 400px;
+            z-index: 2;
+            filter: drop-shadow(0 0 50px var(--primary-glow));
         }
 
         /* FEATURES */
         .features {
-            padding: 70px;
+            padding: 100px 80px;
+            background: var(--bg-void);
             text-align: center;
-        }
-
-        .features h2 {
-            margin-bottom: 50px;
-            font-size: 28px;
         }
 
         .feature-grid {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             justify-content: center;
-            flex-wrap: wrap;
+            margin-top: 50px;
         }
 
         .feature-card {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            width: 260px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            background: #0a0a0a; /* Darker card */
+            padding: 40px;
+            border-radius: 24px;
+            width: 300px;
+            border: 1px solid rgba(157, 78, 221, 0.1);
             transition: 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.15);
         }
 
-        .feature-card h3 {
-            margin-bottom: 10px;
-        }
-
-        .feature-card p {
-            color: #64748b;
-            font-size: 14px;
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
         /* FOOTER */
         .footer {
-            background: #1e293b;
-            color: white;
+            padding: 40px;
             text-align: center;
-            padding: 25px;
-            margin-top: 40px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .hero img {
-                margin-top: 30px;
-            }
+            background: #000;
+            border-top: 1px solid #111;
+            color: #444;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo">AssetPro</div>
-
+    <div class="logo">ASSETS</div>
     <div class="nav-links">
         <a href="#">About</a>
-        <a href="#">Solutions</a>
-        <a href="#">Pricing</a>
+        <a href="#">Working</a>
+        <a href="#">Security</a>
     </div>
-
-    <button class="login-btn" th:onclick="|window.location.href='@{/login}'|">
+    <button class="btn btn-primary" style="padding: 10px 25px; font-size: 12px;" th:onclick="|window.location.href='@{/login}'|">
         Login
     </button>
 </div>
 
-<!-- HERO -->
 <section class="hero">
     <div class="hero-text">
-        <h1>The smarter way to manage your assets</h1>
-        <p>Track, manage and monitor all your company assets easily with a powerful and modern system.</p>
-
+        <h1>Welcome To<br><span style="color: #000; text-shadow: none;">The Future.</span></h1>
+        <p>Manage your IT assets efficiently and securely with our next-gen neural dashboard.</p>
         <div class="hero-buttons">
-            <button class="demo-btn">Book Demo</button>
-            <button class="free-btn">Free Trial</button>
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-outline">Learn More</button>
         </div>
     </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <img class="hero-img" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 </section>
 
-<!-- FEATURES -->
 <section class="features">
-    <h2>Why Choose Us</h2>
-
+    <h2 style="font-size: 40px; letter-spacing: 3px;">SYSTEM CAPABILITIES</h2>
     <div class="feature-grid">
         <div class="feature-card">
-            <h3>Easy Tracking</h3>
-            <p>Track assets in real time with ease.</p>
+            <i class="ph ph-cpu feature-icon"></i>
+            <h3>Neural Auditing</h3>
+            <p>Automated hardware tracking with AI-driven reporting.</p>
         </div>
-
         <div class="feature-card">
-            <h3>Secure Data</h3>
-            <p>Your data is safe and protected.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Fast Reports</h3>
-            <p>Generate reports instantly.</p>
+            <i class="ph ph-shield-chevron feature-icon"></i>
+            <h3>Iron Security</h3>
+            <p>Encrypted data silos for enterprise-level asset safety.</p>
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
 <div class="footer">
-    © 2026 AssetPro | All Rights Reserved
+    &copy; 2026 ASSETPRO | ALL SYSTEMS OPERATIONAL
 </div>
 
 </body>

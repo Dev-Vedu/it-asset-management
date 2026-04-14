@@ -3,186 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | IT Asset Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Login | IT Asset Management</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        :root {
-            --primary: #6366f1;
-            --accent-orange: #f97316;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-gradient);
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            /* Deep Black Background */
+            background: #000000;
+
         }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            width: 100%;
-            max-width: 400px;
-            padding: 3rem 2.5rem;
-            border-radius: 28px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            text-align: center;
+        .container {
+            width: 850px;
+            height: 500px;
+            display: flex;
+            background: #ffffff; /* Pure White Box */
+            border-radius: 30px ;
+            overflow: hidden;
+            border: 1px solid #fff;
+            box-shadow: 0 25px 50px -12px rgba(109, 40, 217, 0.2);
+        }
+
+        /* LEFT PANEL - Minimalist & Bold */
+        .left {
+            flex: 1.2;
+            background-image: url('css/images/loginback.jpg');
+            background-size: cover;         /* ✅ full screen cover */
+            background-position: center;
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Modernized the clip path to be smoother */
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        }
+
+        .left h1 {
+            font-size: 42px;
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .left p {
+            font-size: 15px;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        /* RIGHT PANEL - Clean & Spacious */
+        .right {
+            flex: 1;
+            background: #ffffff;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-size: 28px;
+            color: #111;
+            margin-bottom: 35px;
+            font-weight: 700;
             position: relative;
         }
 
-        /* The Circular Logo Container */
-        .logo-container {
-            width: 90px;
-            height: 90px;
-            background: white;
-            margin: -75px auto 1.5rem auto; /* Pulls the logo up half-way */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border: 4px solid #6366f1;
+        /* Subtle underline for the Login title */
+        .right h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 4px;
+            background: #6d28d9;
+            border-radius: 2px;
         }
 
-        .logo-container svg {
-            width: 60px;
-            height: 60px;
-        }
-
-        h2 {
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-            font-size: 1.75rem;
-            font-weight: 800;
-        }
-
-        p.subtitle {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        form { text-align: left; }
-        .form-group { margin-bottom: 1.2rem; }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 0.4rem;
+        .input-group {
+            margin-bottom: 25px;
         }
 
         input {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            box-sizing: border-box;
+            padding: 12px 15px;
+            background: #f9fafb; /* Light grey input for depth */
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            color: #111;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            border-color: #6d28d9;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.1);
         }
 
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.8rem;
-        }
-
+        /* THE PURPLE BUTTON */
         button {
             width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 0.9rem;
+            padding: 14px;
+            margin-top: 15px;
             border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
+            border-radius: 12px;
+            background: #6d28d9;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
         button:hover {
-            background: #4f46e5;
+            background: #5b21b6;
             transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(109, 40, 217, 0.4);
         }
 
-        .footer {
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            border-top: 1px solid #f1f5f9;
-            padding-top: 1rem;
+        button:active {
+            transform: translateY(0);
+        }
+
+        .extra {
+            margin-top: 25px;
+            font-size: 13px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .extra a {
+            color: #6d28d9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .extra a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustment for smaller screens */
+        @media (max-width: 800px) {
+            .container {
+                width: 90%;
+                flex-direction: column;
+                height: auto;
+            }
+            .left {
+                padding: 40px;
+                clip-path: none;
+            }
+            .right {
+                padding: 40px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-card">
-    <div class="logo-container">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="45" cy="40" r="22" fill="#f97316" />
-            <path d="M45 18 A22 22 0 0 1 45 62 M45 18 A8 22 0 0 1 45 62 M45 18 A8 22 0 0 0 45 62 M45 18 A22 22 0 0 0 45 62" stroke="white" stroke-width="1.5" fill="none"/>
-            <line x1="23" y1="40" x2="67" y2="40" stroke="white" stroke-width="1.5" />
+<div class="container">
 
-            <circle cx="70" cy="65" r="14" fill="#1e293b" />
-            <circle cx="70" cy="65" r="5" fill="white" />
-            <g fill="#1e293b">
-                <rect x="67" y="48" width="6" height="6" rx="1" />
-                <rect x="67" y="76" width="6" height="6" rx="1" />
-                <rect x="53" y="62" width="6" height="6" rx="1" />
-                <rect x="81" y="62" width="6" height="6" rx="1" />
-            </g>
-
-            <text x="45" y="85" font-family="Arial" font-size="16" font-weight="900" fill="#f97316" text-anchor="middle">IT</text>
-        </svg>
+    <!-- LEFT SIDE -->
+    <div class="left">
+        <h1>WELCOME<br>BACK!</h1>
+        <p>Manage your IT assets efficiently and securely.</p>
     </div>
 
-    <h2>Welcome Back</h2>
-    <p class="subtitle">Enter your credentials to manage your assets</p>
+    <!-- RIGHT SIDE -->
+    <div class="right">
+        <h2>Login</h2>
 
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" placeholder="admin@company.com" required>
+        <form action="/login" method="post">
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div class="extra">
+            No Account? <a href="#">Sign up</a>
         </div>
-
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="••••••••" required>
-        </div>
-
-        <div class="form-options">
-            <label style="display: flex; align-items: center; gap: 5px;">
-                <input type="checkbox"> Remember me
-            </label>
-            <a href="#" style="color: #6366f1; text-decoration: none; font-weight: 600;">Forgot password?</a>
-        </div>
-
-        <button type="submit">Sign In</button>
-    </form>
-
-    <div class="footer">
-        &copy; 2026 IT Asset Management System
     </div>
+
 </div>
 
 </body>
