@@ -2,198 +2,263 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Profile | Management System</title>
+    <title>Admin Profile | AssetPro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary: #8b5cf6;
+            --sidebar-bg: #0b0e14;
+            --primary: #6d28d9;
             --accent: #a855f7;
-            --bg-lavender: #F3E8FF;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --bg-body: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #f3f4f6;
         }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        html, body {
             margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+        }
+
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 0;
+            flex-shrink: 0;
+        }
+
+        .logo-area { padding: 0 25px 40px; }
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .panel-title { font-size: 20px; font-weight: 800; color: white; }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 4px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .nav-links li a:hover { background: #252525; color: white; }
+        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .top-bar {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
+        }
+
+        /* --- PROFILE CARD --- */
+        .content-area {
+            padding: 60px 50px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-lavender);
         }
 
-        /* Main Content Box with Black Border */
-        .profile-card {
-            background: #ffffff;
-            width: 90%;
-            max-width: 400px;
-            padding: 4rem 2.5rem;
-            border-radius: 35px;
-            border: 2px solid #000000;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+        .profile-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            padding: 40px;
             text-align: center;
-            animation: slideUp 0.6s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            animation: slideUp 0.5s ease;
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .avatar {
-            width: 100px;
-            height: 100px;
-            background: var(--primary);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            background:var(--primary);
+            color: white;
+            border-radius: 35px; /* Squircle look */
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-            font-size: 2.5rem;
+            font-size: 40px;
             font-weight: 800;
-            border: 2px solid #000000;
-            text-transform: uppercase;
+            border: 1px solid var(--border-color);
         }
 
-        h2 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.8rem;
-            color: #000000;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        .role-badge {
+        .profile-name { font-size: 26px; font-weight: 800; color: var(--text-main); margin: 0; }
+        .role-tag {
             display: inline-block;
-            background: rgba(139, 92, 246, 0.1);
+            margin-top: 8px;
+            padding: 6px 16px;
+            background: #f5f3ff;
             color: var(--primary);
-            padding: 0.5rem 1.2rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            margin-bottom: 2.5rem;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            border: 1px solid #000000;
+            letter-spacing: 1px;
         }
 
-        .info-box {
-            background: #f8fafc;
-            padding: 1.8rem;
-            border-radius: 24px;
-            margin-bottom: 2.5rem;
+        .info-grid {
+            margin-top: 40px;
             text-align: left;
-            border: 2px solid #000000;
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 20px;
         }
 
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.2rem;
+        .info-row {
+            margin-bottom: 20px;
         }
+        .info-row:last-child { margin-bottom: 0; }
 
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .label {
-            font-weight: 800;
+        .info-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
             color: var(--text-muted);
-            font-size: 0.7rem;
             text-transform: uppercase;
-            margin-bottom: 4px;
-            letter-spacing: 0.05em;
+            margin-bottom: 5px;
         }
 
-        .value {
-            color: #000000;
+        .info-value {
+            font-size: 16px;
             font-weight: 700;
-            font-size: 1rem;
-            word-break: break-all;
+            color: #000;
         }
 
-        .actions {
+        .profile-actions {
+            margin-top: 40px;
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
+            gap: 15px;
         }
 
-        .actions a {
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 700;
-            padding: 0.9rem 1.8rem;
-            border-radius: 14px;
-            transition: 0.3s;
+        .btn-action {
             flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.3s;
             text-align: center;
         }
 
-        .btn-back {
-            background: #f1f5f9;
-            color: #000000;
-            border: 2px solid #000000;
-        }
+        .btn-edit { background: var(--primary); color: white; }
+        .btn-edit:hover { background: #5b21b6; transform: translateY(-2px); }
 
-        .btn-back:hover {
-            background: #e2e8f0;
-            transform: translateX(-5px);
-        }
+        .btn-logout { background: #fee2e2; color: #ef4444; }
+        .btn-logout:hover { background: #fecaca; }
 
-        .btn-logout {
-            background: #000000;
-            color: #ffffff;
-            border: 2px solid #000000;
-        }
-
-        .btn-logout:hover {
-            transform: scale(1.05);
-            background: #222222;
-        }
     </style>
 </head>
 <body>
 
-<div class="profile-card">
-    <div class="avatar"
-         th:text="${user != null and user.name != null and !user.name.isEmpty()} ? ${user.name.substring(0,1)} : 'A'">
-        A
-    </div>
-
-    <h2 th:text="${user != null and user.name != null} ? ${user.name} : 'Admin Profile'">
-        Admin Profile
-    </h2>
-
-    <div class="role-badge">ADMINISTRATOR</div>
-
-    <div class="info-box">
-        <div class="info-item">
-            <span class="label">Email Address:</span>
-            <span class="value"
-                  th:text="${user != null and user.email != null} ? ${user.email} : 'admin@system.com'">
-                admin@gmail.com
-            </span>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo-area">
+            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div class="panel-title">AssetPro</div>
         </div>
-        <div class="info-item">
-            <span class="label">System Status:</span>
-            <span class="value" style="color: #10b981;">● Active</span>
+        <ul class="nav-links">
+            <li><a href="/admin/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
+            <li><a href="/admin/add-user"><i class="fas fa-user-plus"></i> Add User</a></li>
+            <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>
+            <li><a href="/admin/issues"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
+            <li><a href="/admin/profile" class="active"><i class="fas fa-user-circle"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
-    </div>
+    </nav>
 
-    <div class="actions">
-        <a href="/admin/dashboard" class="btn-back">← Back</a>
-        <a href="/logout" class="btn-logout">Logout</a>
-    </div>
+    <main class="main-content">
+        <header class="top-bar">
+            <div style="font-weight: 700; font-size: 18px;">Personal Profile</div>
+
+        </header>
+
+        <div class="content-area">
+            <div class="profile-wrapper">
+                <div class="profile-avatar"
+                     th:text="${user != null and user.name != null} ? ${user.name.substring(0,1)} : 'A'">A</div>
+
+                <h2 class="profile-name" th:text="${user != null and user.name != null} ? ${user.name} : 'Admin User'">Admin Profile</h2>
+                <div class="role-tag">System Administrator</div>
+
+                <div class="info-grid">
+                    <div class="info-row">
+                        <span class="info-label">Email Address</span>
+                        <span class="info-value" th:text="${user != null and user.email != null} ? ${user.email} : 'admin@assetpro.com'">admin@gmail.com</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Account Status</span>
+                        <span class="info-value" style="color: #10b981;">
+                            <i class="fas fa-check-circle"></i> Active
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Permissions</span>
+                        <span class="info-value">Full Read/Write Access</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <a href="/admin/dashboard" class="btn-action btn-edit">Back to Dashboard</a>
+                    <a href="/logout" class="btn-action btn-logout">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 </body>

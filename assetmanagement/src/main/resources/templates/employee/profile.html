@@ -2,115 +2,272 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Profile | Management System</title>
+    <title>My Profile | AssetPro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary: #8b5cf6;
-            --bg-lavender: #F3E8FF;
-            --white: #ffffff;
-            --text-main: #0f172a;
+            --sidebar-bg: #0b0e14;
+            --primary: #6d28d9;
+            --accent: #a855f7;
+            --bg-body: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #f3f4f6;
+            --success: #10b981;
         }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        html, body {
             margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+        }
+
+        .dashboard-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-lavender);
+            height: 100vh;
+            width: 100vw;
         }
 
-        .profile-card {
-            background: var(--white);
-            width: 90%;
-            max-width: 400px;
-            padding: 4rem 2.5rem;
-            border-radius: 35px;
-            border: 2px solid #000000; /* Added Black Border */
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.12);
-            text-align: center;
-            animation: popIn 0.6s ease-out;
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 0;
+            flex-shrink: 0;
         }
 
-        .avatar {
-            width: 100px;
-            height: 100px;
+        .logo-area { padding: 0 25px 40px; }
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
             background: var(--primary);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 800;
-            border: 2px solid #000; /* Added Black Border */
         }
+        .panel-title { font-size: 20px; font-weight: 800; color: white; }
 
-        .role-badge {
-            display: inline-block;
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1.2rem;
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 4px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             border-radius: 12px;
-            font-weight: 800;
-            margin-bottom: 2.5rem;
-            border: 1px solid #000; /* Small Black Border */
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .nav-links li a:hover { background: #252525; color: white; }
+        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+
+        .sidebar-footer { margin-top: auto; padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .logout-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .logout-link:hover { color: #ef4444; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
         }
 
-        .info-box {
-            background: #f8fafc;
-            padding: 1.8rem;
-            border-radius: 24px;
-            margin-bottom: 2.5rem;
-            text-align: left;
-            border: 1px solid #000; /* Added Black Border */
+        .top-bar {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: #F3E8FF; /* Tint to match employee portal style */
+            flex-shrink: 0;
         }
 
-        .btn-logout {
-            background: #000;
+        /* --- PROFILE CARD --- */
+        .content-area {
+            padding: 60px 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            background: var(--primary);
             color: white;
-            padding: 0.9rem 1.8rem;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            flex: 1;
+            border-radius: 35px; /* Squircle look */
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 800;
         }
 
-        .btn-back {
-            background: #f1f5f9;
+        .profile-name { font-size: 26px; font-weight: 800; color: #000; margin: 0; }
+        .role-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 16px;
+            background: #f3f4f6;
+            color: var(--primary);
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-grid {
+            margin-top: 40px;
+            text-align: left;
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .info-row { margin-bottom: 25px; }
+        .info-row:last-child { margin-bottom: 0; }
+
+        .info-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 700;
             color: #000;
-            border: 2px solid #000;
-            padding: 0.9rem 1.8rem;
+        }
+
+        .status-active {
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .profile-actions {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 14px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 700;
-            flex: 1;
+            font-size: 14px;
+            transition: 0.3s;
+            text-align: center;
+            border: none;
+            cursor: pointer;
         }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .btn-back { background: var(--primary); color: white;  }
+        .btn-back:hover { background: #5b21b6; transform: translateY(-2px); }
+
+        .btn-signout { background: #fee2e2; color: #ef4444; }
+        .btn-signout:hover { background: #fecaca; transform: translateY(-2px); }
+
     </style>
 </head>
 <body>
-<div class="profile-card">
-    <div class="avatar" th:text="${user != null and user.name != null} ? ${user.name.substring(0,1).toUpperCase()} : 'E'">E</div>
-    <h2 th:text="${user.name}" style="color: #000; font-weight: 800;">Employee Name</h2>
-    <div class="role-badge" th:text="${user.role}">Employee</div>
-    <div class="info-box">
-        <div style="margin-bottom: 15px;">
-            <small style="text-transform: uppercase; font-weight: 800; color: #64748b;">Email Address</small><br>
-            <b th:text="${user.email}">email@example.com</b>
+
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo-area">
+            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div class="panel-title">AssetPro</div>
         </div>
-        <div>
-            <small style="text-transform: uppercase; font-weight: 800; color: #64748b;">Employee ID</small><br>
-            <b th:text="${user.employeeId}">EMP-001</b>
+        <ul class="nav-links">
+            <li><a href="/employee/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/employee/report-issue"><i class="fas fa-exclamation-circle"></i> Report Issue</a></li>
+            <li><a href="/employee/profile" class="active"><i class="fas fa-user-circle"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
-    </div>
-    <div style="display: flex; gap: 10px;">
-        <a href="/employee/dashboard" class="btn-back">← Back</a>
-        <a href="/logout" class="btn-logout">Logout</a>
-    </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div style="font-weight: 700; font-size: 18px; color: var(--text-main);">Personal Profile</div>
+            <div style="color: var(--text-muted); font-size: 14px;">Employee Portal</div>
+        </header>
+
+        <div class="content-area">
+            <div class="profile-wrapper">
+                <div class="profile-avatar"
+                     th:text="${user != null and user.name != null} ? ${user.name.substring(0,1).toUpperCase()} : 'E'">E</div>
+
+                <h2 class="profile-name" th:text="${user.name}">Employee Name</h2>
+                <div class="role-tag" th:text="${user.role}">Employee</div>
+
+                <div class="info-grid">
+                    <div class="info-row">
+                        <span class="info-label">Email Address</span>
+                        <span class="info-value" th:text="${user.email}">employee@assetpro.com</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Employee Identification</span>
+                        <span class="info-value" th:text="${user.employeeId}">EMP-1234</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Account Status</span>
+                        <span class="info-value status-active">
+                            <i class="fas fa-check-circle"></i> Active
+                        </span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <a href="/employee/dashboard" class="btn-action btn-back">Back to Dashboard</a>
+                    <a href="/logout" class="btn-action btn-signout">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
+
 </body>
 </html>

@@ -2,218 +2,279 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User | Admin Panel</title>
+    <title>Add User | AssetPro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
+            --sidebar-bg: #0b0e14;
+            --primary: #6d28d9;
             --accent: #a855f7;
-            --bg-lavender: #F3E8FF;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --bg-body: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #f3f4f6;
         }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        html, body {
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+        }
+
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 0;
+            flex-shrink: 0;
+        }
+
+        .logo-area { padding: 0 25px 40px; }
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .panel-title { font-size: 20px; font-weight: 800; color: white; }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 4px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover { background: #252525; color: white; }
+        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .top-bar {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
+        }
+
+        /* --- FORM CARD --- */
+        .content-area {
+            padding: 40px 50px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-lavender);
         }
 
-        .user-card {
-            background: #ffffff;
-            padding: 2.5rem;
+        .form-card {
+            background: white;
+            padding: 40px;
             border-radius: 24px;
-            /* Applied solid black border as requested */
-            border: 2px solid #000000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
             width: 100%;
-            max-width: 550px;
-            animation: fadeIn 0.7s ease-out;
+            max-width: 600px;
+            animation: slideUp 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        h2 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+        .form-card h2 { margin: 0 0 8px 0; font-size: 26px; font-weight: 800; color: var(--text-main); }
+        .form-card p.subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
+            gap: 20px;
         }
 
-        .full-width {
-            grid-column: span 2;
-        }
+        .full-width { grid-column: span 2; }
 
-        .form-group {
-            margin-bottom: 0.5rem;
-        }
-
-        label {
+        .form-group label {
             display: block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: #000000;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.5px;
         }
 
-        input,
-        select {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #f1f5f9;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            font-size: 0.95rem;
-            box-sizing: border-box;
-            background-color: #f8fafc;
+            font-size: 15px;
             font-family: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f9fafb;
+            transition: 0.3s;
+            box-sizing: border-box;
         }
 
-        input:focus,
-        select:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary);
-            background-color: #fff;
-            box-shadow: 0 0 15px var(--primary-glow);
-            transform: translateY(-2px);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.1);
         }
 
-        button {
+        .btn-submit {
             grid-column: span 2;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: var(--primary);
             color: white;
-            padding: 1rem;
+            padding: 16px;
             border: none;
             border-radius: 12px;
-            font-size: 1rem;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-            margin-top: 1rem;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
-            filter: brightness(1.1);
+        .btn-submit:hover {
+            background: #5b21b6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(109, 40, 217, 0.2);
         }
 
         .back-link {
             display: block;
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 25px;
             text-decoration: none;
-            color: #000000;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: color 0.2s;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
         }
 
-        .back-link:hover {
-            color: var(--primary);
-        }
-
-        @media (max-width: 480px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .full-width {
-                grid-column: span 1;
-            }
-            button {
-                grid-column: span 1;
-            }
-        }
+        .back-link:hover { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<div class="user-card">
-    <h2>Add New User</h2>
-    <p class="subtitle">Register a new employee or field worker</p>
-
-    <form action="/admin/add-user" method="post">
-        <div class="form-grid">
-
-            <div class="form-group full-width">
-                <label>Full Name</label>
-                <input type="text" name="name" required placeholder="Jane Smith">
-            </div>
-
-            <div class="form-group full-width">
-                <label>Email Address</label>
-                <input type="text" name="email" required placeholder="jane@company.com">
-            </div>
-
-            <div class="form-group full-width">
-                <label>Password</label>
-                <input type="password" name="password" required placeholder="••••••••">
-            </div>
-
-            <div class="form-group">
-                <label>Access Role</label>
-                <select name="role">
-                    <option value="EMPLOYEE">Employee</option>
-                    <option value="WORKER">Worker</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Employee ID</label>
-                <input type="text" name="employeeId" placeholder="EMP-505">
-            </div>
-
-            <div class="form-group full-width">
-                <label>Worker Type (If Applicable)</label>
-                <select name="workerType">
-                    <option value="">--Select Type--</option>
-                    <option value="HARDWARE">Hardware</option>
-                    <option value="SOFTWARE">Software</option>
-                    <option value="NETWORK">Network</option>
-                </select>
-            </div>
-
-            <button type="submit">Create User Account</button>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo-area">
+            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div class="panel-title">AssetPro</div>
         </div>
-    </form>
+        <ul class="nav-links">
+            <li><a href="/admin/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
+            <li><a href="/admin/add-user" class="active"><i class="fas fa-user-plus"></i> Add User</a></li>
+            <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>
+            <li><a href="/admin/issues"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
+            <li><a href="/admin/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
 
-    <a href="/admin/dashboard" class="back-link">← Back to Admin Dashboard</a>
+    <main class="main-content">
+        <header class="top-bar">
+            <div style="font-weight: 700; font-size: 18px;">User Management</div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 13px; color: var(--text-muted);">Admin Terminal v2.4</span>
+                <div style="width: 35px; height: 35px; border-radius: 50%; background: #e2e8f0;"></div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="form-card">
+                <h2>Create Account</h2>
+                <p class="subtitle">Assign roles and credentials for new staff members.</p>
+
+                <form action="/admin/add-user" method="post">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Full Name</label>
+                            <input type="text" name="name" required placeholder="Jane Smith">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Email Address</label>
+                            <input type="email" name="email" required placeholder="jane@assetpro.com">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Temporary Password</label>
+                            <input type="password" name="password" required placeholder="••••••••">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Access Role</label>
+                            <select name="role">
+                                <option value="EMPLOYEE">Employee</option>
+                                <option value="WORKER">Worker (Maintenance)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Employee ID</label>
+                            <input type="text" name="employeeId" placeholder="EMP-XXX">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Worker Specialization (Optional)</label>
+                            <select name="workerType">
+                                <option value="">-- No Specialization --</option>
+                                <option value="HARDWARE">Hardware Tech</option>
+                                <option value="SOFTWARE">Software Support</option>
+                                <option value="NETWORK">Network Admin</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Create User Account</button>
+                    </div>
+                </form>
+
+                <a href="/admin/dashboard" class="back-link">Return to Dashboard</a>
+            </div>
+        </div>
+    </main>
 </div>
 
 </body>

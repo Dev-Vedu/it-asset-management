@@ -2,217 +2,276 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Issues | Admin Panel</title>
+    <title>All Issues | AssetPro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary: #8b5cf6;
+            --sidebar-bg: #0b0e14;
+            --primary: #6d28d9;
             --accent: #a855f7;
-            --bg-lavender: #F3E8FF;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --card-bg: #ffffff;
+            --bg-body: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #f3f4f6;
+            --warning: #f59e0b;
         }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        html, body {
             margin: 0;
-            padding: 40px;
-            background-color: var(--bg-lavender);
-            color: var(--text-main);
-            min-height: 100vh;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            animation: fadeIn 0.6s ease-out;
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 0;
+            flex-shrink: 0;
+        }
+
+        .logo-area { padding: 0 25px 40px; }
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .panel-title { font-size: 20px; font-weight: 800; color: white; }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 4px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover { background: #252525; color: white; }
+        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 40px 50px;
+            overflow-y: auto;
+        }
+
+        /* --- TABLE CARD --- */
+        .table-card {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Top Navigation Header */
-        .header-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
 
-        h2 {
-            margin: 0;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-actions a {
-            text-decoration: none;
-            color: #000000;
+        .styled-table th {
+            padding: 20px 25px;
+            background: #fafafa;
+            font-size: 12px;
             font-weight: 700;
-            font-size: 0.9rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 2px solid #000000;
-            background-color: #ffffff;
-        }
-
-        .nav-actions a:hover {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        .logout-btn {
-            color: #ef4444 !important;
-            border-color: #ef4444 !important;
-        }
-
-        .logout-btn:hover {
-            background: #ef4444 !important;
-            color: #ffffff !important;
-        }
-
-        /* Empty State with Black Border */
-        .empty-state {
-            text-align: center;
-            padding: 4rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 2px solid #000000;
             color: var(--text-muted);
-            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* Issue Cards with Black Borders */
-        .issue-list {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            gap: 1.5rem;
+        .styled-table td {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-main);
         }
 
-        .issue-card {
-            background: var(--card-bg);
-            padding: 1.5rem 2rem;
-            border-radius: 20px;
-            border: 2px solid #000000;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:hover { background-color: #f9fafb; }
 
-        .issue-card:hover {
-            transform: scale(1.02);
-        }
-
-        .issue-details b {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #000000;
-        }
-
-        .issue-info {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .info-item strong {
-            color: #000000;
-            font-weight: 700;
-        }
-
-        /* Status & Type Badges */
+        /* --- BADGES --- */
         .badge {
-            padding: 0.5rem 1rem;
+            padding: 6px 12px;
             border-radius: 8px;
-            font-size: 0.75rem;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 1px solid #000000;
         }
 
-        .badge-type {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--primary);
+        .badge-type { background: #f3f4f6; color: var(--text-muted); }
+        .badge-status { background: #fffbeb; color: var(--warning); border: 1px solid #fef3c7; }
+
+        .empty-state {
+            padding: 100px 0;
+            text-align: center;
+            color: var(--text-muted);
         }
 
-        .badge-status {
-            background: #fef3c7;
-            color: #92400e;
+        .search-mini {
+            position: relative;
         }
 
-        @media (max-width: 768px) {
-            .issue-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .header-nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
+        .search-mini input {
+            padding: 10px 15px 10px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: #f9fafb;
+            font-family: inherit;
+            outline: none;
+            width: 250px;
         }
+
+        .search-mini i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header class="header-nav">
-        <h2>Reported Issues</h2>
-        <div class="nav-actions">
-            <a href="/admin/dashboard">← Dashboard</a>
-            <a href="/logout" class="logout-btn">Logout</a>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <div class="logo-area">
+            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div class="panel-title">AssetPro</div>
         </div>
-    </header>
+        <ul class="nav-links">
+            <li><a href="/admin/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
+            <li><a href="/admin/add-user"><i class="fas fa-user-plus"></i> Add User</a></li>
+            <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>
+            <li><a href="/admin/issues" class="active"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
+            <li><a href="/admin/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Logout</a>
+        </div>
+    </nav>
 
-    <p th:if="${#lists.isEmpty(issues)}" class="empty-state">
-        No active issues found in the system.
-    </p>
+    <main class="main-content">
+        <header class="top-bar">
+            <div style="font-weight: 700; font-size: 18px;">Support Tickets</div>
+            <div class="search-mini">
+                <i class="fas fa-filter"></i>
+                <input type="text" id="issueFilter" placeholder="Filter by description..." onkeyup="filterTable()">
+            </div>
+        </header>
 
-    <ul class="issue-list">
-        <li th:each="i : ${issues}" class="issue-card">
-            <div class="issue-details">
-                <b th:text="${i.description}">Issue Description</b>
-                <div class="issue-info">
-                    <span class="info-item">
-                        <strong>User ID:</strong> <span th:text="${i.userId}">101</span>
-                    </span>
-                    <span class="info-item">
-                        <strong>ID:</strong> <span th:text="${i.id}">#ID</span>
-                    </span>
+        <div class="content-area">
+            <div style="margin-bottom: 25px;">
+                <h2 style="margin: 0; font-size: 24px; font-weight: 800;">Reported Issues</h2>
+                <p style="color: var(--text-muted); margin: 5px 0 0;">Review and manage hardware and software requests from employees.</p>
+            </div>
+
+            <div class="table-card">
+                <div th:if="${#lists.isEmpty(issues)}" class="empty-state">
+                    <i class="fas fa-clipboard-check" style="font-size: 40px; opacity: 0.2; margin-bottom: 15px;"></i>
+                    <p>No active issues found in the system.</p>
                 </div>
-            </div>
 
-            <div class="issue-badges">
-                <span class="badge badge-type" th:text="${i.type}">HARDWARE</span>
-                <span class="badge badge-status" th:text="${i.status}">PENDING</span>
+                <table class="styled-table" th:if="${not #lists.isEmpty(issues)}" id="issueTable">
+                    <thead>
+                    <tr>
+                        <th>Issue ID</th>
+                        <th>Description</th>
+                        <th>User ID</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <li th:each="i : ${issues}" th:remove="tag">
+                        <tr>
+                            <td style="font-weight: 600; color: var(--primary);" th:text="'#' + ${i.id}">#1</td>
+                            <td style="font-weight: 700; max-width: 300px;" th:text="${i.description}">Issue Description</td>
+                            <td th:text="${i.userId}">101</td>
+                            <td><span class="badge badge-type" th:text="${i.type}">HARDWARE</span></td>
+                            <td><span class="badge badge-status" th:text="${i.status}">PENDING</span></td>
+                        </tr>
+                    </li>
+                    </tbody>
+                </table>
             </div>
-        </li>
-    </ul>
+        </div>
+    </main>
 </div>
+
+<script>
+    function filterTable() {
+        const input = document.getElementById("issueFilter");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("issueTable");
+        if(!table) return;
+        const tr = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+            const descriptionCell = tr[i].getElementsByTagName("td")[1];
+            if (descriptionCell) {
+                const textValue = descriptionCell.textContent || descriptionCell.innerText;
+                tr[i].style.display = textValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
