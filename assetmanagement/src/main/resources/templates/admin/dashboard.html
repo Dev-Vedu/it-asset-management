@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard | AssetPro</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --sidebar-bg: #0b0e14; /* Darker black from your screenshot */
+            --sidebar-bg: #0b0e14;
             --primary: #6d28d9;
             --accent: #a855f7;
             --bg-body: #ffffff;
@@ -17,7 +18,6 @@
             --border-color: #f3f4f6;
         }
 
-        /* --- PREVENT GLOBAL SCROLL --- */
         html, body {
             margin: 0;
             padding: 0;
@@ -33,7 +33,7 @@
             width: 100vw;
         }
 
-        /* --- SIDEBAR --- */
+        /* SIDEBAR */
         .sidebar {
             width: 260px;
             background: var(--sidebar-bg);
@@ -42,23 +42,29 @@
             display: flex;
             flex-direction: column;
             padding: 30px 0;
-            flex-shrink: 0;
         }
 
         .logo-area { padding: 0 25px 40px; }
+
         .logo-placeholder {
             width: 40px;
             height: 40px;
             background: var(--primary);
             border-radius: 10px;
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .panel-title { font-size: 20px; font-weight: 800; color: white; }
 
-        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .panel-title { font-size: 20px; font-weight: 800; }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
         .nav-links li a {
             color: #94a3b8;
             text-decoration: none;
@@ -69,49 +75,40 @@
             gap: 12px;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 16px;
         }
 
-
-        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
-        .nav-links li a:hover{
-        background:#252525;
-
+        .nav-links li a:hover {
+            background:#252525;
+            color:white;
         }
 
+        .nav-links li a.active {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
 
-        .sidebar-footer { margin-top: auto ;margin-bottom: 10px; padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 20px 25px;
+        }
+
         .logout-link {
-
             color: #94a3b8;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
             display: flex;
-            align-items: center;
             gap: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
         }
 
-         .logout-link:hover {
+        .logout-link:hover { color: red; }
 
-             color: #ef4444;
-         }
-
-        /* --- MAIN CONTENT --- */
+        /* MAIN */
         .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             height: 100vh;
-            padding: 0; /* Removing padding to allow full-width top bar */
-            overflow: hidden;
         }
 
-
-        /* --- TOP BAR (As requested in image_64c5c6.png) --- */
         .top-bar {
             height: 80px;
             display: flex;
@@ -120,201 +117,135 @@
             padding: 0 50px;
             border-bottom: 1px solid var(--border-color);
             background: #F3E8FF;
-            flex-shrink: 0;
         }
 
-        .welcome-msg { font-weight: 700; font-size: 20px; }
-
-        /* --- SEARCH BOX FIX --- */
-        .search-container {
-            position: relative; /* REQUIRED for the icon to stay inside */
-            width: 300px; /* Locked width so it doesn't go outside */
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none; /* Icon won't block typing */
-        }
-
-        .search-container input {
-            width: 100%; /* Spans full 300px of parent */
-            padding: 12px 20px 12px 50px; /* Left padding makes room for icon */
-            border-radius: 30px; /* Rounded pill style from your screenshot */
-            border: 1px solid var(--border-color);
-            background: #f9fafb;
-            outline: none;
-            font-family: inherit;
-            transition: 0.3s;
-            box-sizing: border-box; /* Ensures padding doesn't add to width */
-        }
-
-        .search-container input:focus {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.1);
-        }
-
-        .user-profile-mini {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #e2e8f0;
-            overflow: hidden;
-            margin-left: 20px;
-            background-image: url('css/images/profileimage.jpg');
-            background-size: cover;
-
-        }
-
-        /* --- CONTENT BODY --- */
         .content-area {
             flex-grow: 1;
             padding: 40px 50px;
-            overflow-y: auto; /* Internal scrolling only */
-
+            overflow-y: auto;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 35px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
-        }
-
-        .stat-card span { color: var(--text-muted); font-size: 13px; font-weight: 700; text-transform: uppercase; }
-        .stat-card h3 { margin: 10px 0 0; font-size: 36px; font-weight: 800; color: var(--primary); }
-
-        /* --- TABLE --- */
         .table-card {
             background: white;
             border-radius: 20px;
             border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
         }
 
-        .styled-table { width: 100%; border-collapse: collapse; }
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         .styled-table th {
             background: #fafafa;
-            padding: 20px 25px;
-            text-align: left;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-muted);
+            padding: 20px;
+        }
+
+        .styled-table td {
+            padding: 20px;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .styled-table td { padding: 20px 25px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
-        .badge { background: #f5f3ff; color: var(--primary); padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 12px; }
+        .badge {
+            background: #f5f3ff;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .edit-btn { background: #3b82f6; color: white; }
+        .delete-btn { background: #ef4444; color: white; }
     </style>
 </head>
+
 <body>
 
 <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
     <nav class="sidebar">
         <div class="logo-area">
-            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div class="logo-placeholder">
+                <i class="fas fa-cube" style="color: white;"></i>
+            </div>
             <div class="panel-title">Admin Panel</div>
         </div>
+
         <ul class="nav-links">
             <li><a href="/admin/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+
+            <li><a href="/admin/assets"><i class="fas fa-box"></i> Manage Assets</a></li> <!-- ✅ ADDED HERE -->
+
             <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
             <li><a href="/admin/add-user"><i class="fas fa-user-plus"></i> Add User</a></li>
             <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>
             <li><a href="/admin/issues"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
             <li><a href="/admin/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
+
         <div class="sidebar-footer">
-            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="/login" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
         </div>
     </nav>
 
+    <!-- MAIN -->
     <main class="main-content">
+
         <header class="top-bar">
-            <div class="welcome-msg">Welcome Admin!</div>
-
-            <div style="display: flex; align-items: center;">
-                <div class="search-container">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="assetSearch" placeholder="Search your items..." onkeyup="filterTable()">
-                </div>
-                <div class="user-profile-mini">
-
-                    <a href="/admin/profile"></a>
-                </div>
-            </div>
+            <h2>Welcome Admin!</h2>
         </header>
 
         <div class="content-area">
-            <div style="margin-bottom: 30px;">
-                <h2 style="margin: 0; font-size: 28px;">Admin Dashboard</h2>
-                <p style="color: var(--text-muted); margin: 5px 0 0;">You have <span th:text="${#lists.size(assets)}" style="color: var(--primary); font-weight: 700;">3</span> total assets in system.</p>
-            </div>
 
-            <section class="stats-grid">
-                <div class="stat-card">
-                    <span>Total Assets</span>
-                    <h3 th:text="${#lists.size(assets)}">3</h3>
-                </div>
-                <div class="stat-card">
-                    <span>Assigned</span>
-                    <h3 style="color: var(--accent);">2</h3>
-                </div>
-                <div class="stat-card">
-                    <span>Issues</span>
-                    <h3 style="color: #ef4444;">0</h3>
-                </div>
-            </section>
+            <h2>Assets</h2>
 
-            <section class="table-card">
+            <div class="table-card">
                 <table class="styled-table">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Asset Name</th>
-                        <th>Serial Number</th>
-                        <th>Assigned To</th>
+                        <th>Name</th>
+                        <th>Serial</th>
+                        <th>Assigned</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
+
                     <tbody>
                     <tr th:each="a, stat : ${assets}">
-                        <td th:text="${stat.count}">1</td>
-                        <td style="font-weight: 700;" th:text="${a.name}">HP Laptop</td>
-                        <td th:text="${a.serialNumber}">12345</td>
-                        <td><span class="badge" th:text="${a.assignedTo}">123</span></td>
+                        <td th:text="${stat.count}"></td>
+                        <td th:text="${a.name}"></td>
+                        <td th:text="${a.serialNumber}"></td>
+                        <td th:text="${a.assignedTo}"></td>
+
+                        <td>
+                            <a th:href="@{'/admin/edit-asset/' + ${a.id}}" class="action-btn edit-btn">Edit</a>
+
+                            <a th:href="@{'/admin/delete-asset/' + ${a.id}}"
+                               class="action-btn delete-btn"
+                               onclick="return confirm('Delete?')">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
+
                 </table>
-            </section>
+            </div>
+
         </div>
     </main>
+
 </div>
-
-<script>
-    function filterTable() {
-        const input = document.getElementById("assetSearch");
-        const filter = input.value.toLowerCase();
-        const table = document.querySelector(".styled-table");
-        const tr = table.getElementsByTagName("tr");
-
-        for (let i = 1; i < tr.length; i++) {
-            const row = tr[i];
-            row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
-        }
-    }
-</script>
 
 </body>
 </html>

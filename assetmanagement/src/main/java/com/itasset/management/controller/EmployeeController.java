@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -22,7 +24,6 @@ public class EmployeeController {
     @Autowired
     private IssueService issueService;
 
-    // Employee Dashboard
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
 
@@ -34,19 +35,66 @@ public class EmployeeController {
 
         model.addAttribute("user", user);
 
-        // ✅ USE employeeId (NOT id)
+        List<Issue> issues = issueService.getIssuesByEmployee(user);
+
         model.addAttribute("assets",
                 assetService.getAssetsByUser(user.getEmployeeId()));
+
+        // ✅ TOTAL ISSUES
+        model.addAttribute("totalIssues", issues.size());
+
+        // ✅ PENDING ISSUES COUNT
+        long pendingCount = issues.stream()
+                .filter(i -> i.getStatus().equalsIgnoreCase("Pending"))
+                .count();
+
+        model.addAttribute("pendingIssues", pendingCount);
 
         return "employee/dashboard";
     }
 
-    // Show Report Issue Page
+
     @GetMapping("/report-issue")
     public String reportIssuePage(Model model) {
         model.addAttribute("issue", new Issue());
         return "employee/report-issue";
     }
+
+    @PostMapping("/report-issue")
+    public String reportIssue(@ModelAttribute Issue issue,
+                              HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            return "redirect:/";
+        }
+
+        issue.setEmployee(user);
+        issue.setStatus("Pending");
+
+        issueService.save(issue);
+
+        return "redirect:/employee/dashboard";
+    }
+
+    @GetMapping("/my-issues")
+    public String myIssues(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            return "redirect:/";
+        }
+
+        List<Issue> issues = issueService.getIssuesByEmployee(user);
+
+        model.addAttribute("issues", issues);
+
+        return "employee/my-issues";
+    }
+
+    //  PROFILE
     @GetMapping("/profile")
     public String employeeProfile(HttpSession session, Model model) {
 
@@ -60,25 +108,4 @@ public class EmployeeController {
 
         return "employee/profile";
     }
-
-    @PostMapping("/report-issue")
-    public String reportIssue(@ModelAttribute Issue issue,
-                              HttpSession session) {
-
-        User user = (User) session.getAttribute("user");
-
-        if (user == null) {
-            return "redirect:/";
-        }
-
-        issue.setStatus("OPEN");
-
-        issue.setEmployee(user);
-
-        issueService.save(issue);
-
-        return "redirect:/employee/dashboard";
-    }
-
-
 }

@@ -23,4 +23,16 @@ public class AssetService {
     public List<Asset> getAllAssets() {
         return assetRepository.findAll();
     }
+    public Asset getById(Long id) {
+        return assetRepository.findById(id).orElse(null);
+    }
+    public void delete(Long id) {
+        assetRepository.deleteById(id);
+    }
+
+    public Asset update(Asset asset) {
+        return assetRepository.save(asset);
+    }
+
+
 }

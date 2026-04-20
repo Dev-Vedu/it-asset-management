@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Asset</title>
+</head>
+<body>
+
+<h2>Edit Asset</h2>
+
+<form th:action="@{/admin/update-asset}" method="post">
+
+    <input type="hidden" th:value="${asset.id}" name="id"/>
+
+    <label>Name:</label>
+    <input type="text" th:value="${asset.name}" name="name"/>
+
+    <label>Serial Number:</label>
+    <input type="text" th:value="${asset.serialNumber}" name="serialNumber"/>
+
+    <br><br>
+
+    <button type="submit">Update</button>
+
+</form>
+
+<br>
+
+<a href="/admin/dashboard">
+    <button>⬅ Back to Assets</button>
+</a>
+
+
+</body>
+</html>

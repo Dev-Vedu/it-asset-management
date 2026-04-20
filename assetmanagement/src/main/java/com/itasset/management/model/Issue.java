@@ -21,6 +21,7 @@ public class Issue {
     @ManyToOne
     private User worker;
 
+
     // GETTERS & SETTERS
 
     public Long getId() {
