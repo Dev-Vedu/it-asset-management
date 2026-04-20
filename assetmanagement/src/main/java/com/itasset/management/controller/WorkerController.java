@@ -18,7 +18,6 @@ public class WorkerController {
     @Autowired
     private IssueService issueService;
 
-    // Worker Dashboard
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
 
@@ -41,7 +40,6 @@ public class WorkerController {
     }
 
 
-    // Update Issue Status
     @GetMapping("/update/{id}")
     public String updateStatus(@PathVariable Long id) {
 

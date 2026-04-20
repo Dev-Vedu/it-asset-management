@@ -40,10 +40,8 @@ public class EmployeeController {
         model.addAttribute("assets",
                 assetService.getAssetsByUser(user.getEmployeeId()));
 
-        // ✅ TOTAL ISSUES
         model.addAttribute("totalIssues", issues.size());
 
-        // ✅ PENDING ISSUES COUNT
         long pendingCount = issues.stream()
                 .filter(i -> i.getStatus().equalsIgnoreCase("Pending"))
                 .count();
@@ -94,7 +92,6 @@ public class EmployeeController {
         return "employee/my-issues";
     }
 
-    //  PROFILE
     @GetMapping("/profile")
     public String employeeProfile(HttpSession session, Model model) {
 

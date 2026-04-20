@@ -7,13 +7,13 @@ public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   // ✅ PRIMARY KEY FIXED
+    private Long id;
 
     private String description;
-    private String status; // OPEN / RESOLVED
-    private String type;   // HARDWARE / NETWORK / SOFTWARE
+    private String status;
+    private String type;
 
-    private Long userId;   // ✅ store employee id separately
+    private Long userId;
 
     @ManyToOne
     private User employee;

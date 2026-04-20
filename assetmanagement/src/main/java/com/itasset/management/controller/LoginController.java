@@ -25,7 +25,6 @@ public class LoginController {
                         HttpSession session,
                         Model model) {
 
-        // Admin login
         if (email.equals("admin@gmail.com") && password.equals("admin123")) {
             return "redirect:/admin/dashboard";
         }
