@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assets</title>
+</head>
+<body>
+
+<h2>All Assets</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Assigned To</th>
+        <th>Action</th>
+        <td>
+            <a th:href="@{'/admin/edit-asset/' + ${a.id}}">
+                <button>Edit</button>
+            </a>
+
+            <a th:href="@{'/admin/delete-asset/' + ${a.id}}">
+                <button style="color:red;">Delete</button>
+            </a>
+        </td>
+
+    </tr>
+
+    <tr th:each="a : ${assets}">
+        <td th:text="${a.id}"></td>
+        <td th:text="${a.name}"></td>
+        <td th:text="${a.type}"></td>
+        <td th:text="${a.assignedTo}"></td>
+        <td>
+            <a th:href="@{'/admin/edit-asset/' + ${a.id}}">Edit</a> |
+            <a th:href="@{'/admin/delete-asset/' + ${a.id}}"
+               onclick="return confirm('Delete this asset?')">Delete</a>
+        </td>
+    </tr>
+</table>
+<a href="/admin/dashboard">
+    <button>⬅ Back to Dashboard</button>
+</a>
+
+</body>
+</html>

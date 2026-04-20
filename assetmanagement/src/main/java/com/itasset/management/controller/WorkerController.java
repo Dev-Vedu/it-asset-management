@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/worker")
 public class WorkerController {
@@ -16,7 +18,6 @@ public class WorkerController {
     @Autowired
     private IssueService issueService;
 
-    // Worker Dashboard
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
 
@@ -39,7 +40,6 @@ public class WorkerController {
     }
 
 
-    // Update Issue Status
     @GetMapping("/update/{id}")
     public String updateStatus(@PathVariable Long id) {
 
@@ -69,5 +69,18 @@ public class WorkerController {
 
         return "worker/profile";
     }
+    @GetMapping("/worker/issues")
+    public String workerIssues(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+
+        List<Issue> issues = issueService.getIssuesByWorker(user);
+
+        model.addAttribute("issues", issues);
+
+        return "worker/issues";
+    }
+
+
 
 }

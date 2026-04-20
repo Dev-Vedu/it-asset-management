@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Issues | AssetPro</title>
+</head>
+<body>
+
+<h2>My Issues</h2>
+
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Status</th>
+    </tr>
+
+    <!-- SHOW DATA -->
+    <tr th:each="i, stat : ${issues}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${i.description}"></td>
+        <td th:text="${i.status}"></td>
+    </tr>
+
+    <!-- IF EMPTY -->
+    <tr th:if="${#lists.isEmpty(issues)}">
+        <td colspan="3">No issues reported</td>
+    </tr>
+
+</table>
+
+<br>
+<a href="/employee/dashboard">Back</a>
+
+</body>
+</html>

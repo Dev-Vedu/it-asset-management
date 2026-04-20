@@ -5,6 +5,7 @@ import com.itasset.management.model.User;
 import com.itasset.management.service.AssetService;
 import com.itasset.management.service.IssueService;
 import com.itasset.management.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,6 @@ public class AdminController {
 
     @Autowired
     private IssueService issueService;
-
-
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
@@ -43,14 +42,34 @@ public class AdminController {
         return "redirect:/admin/dashboard";
     }
 
+    @GetMapping("/assets")
+    public String viewAssets(Model model) {
+        model.addAttribute("assets", assetService.getAllAssets());
+        return "admin/assets";
+    }
+
+    @GetMapping("/delete-asset/{id}")
+    public String deleteAsset(@PathVariable Long id) {
+        assetService.delete(id);
+        return "redirect:/admin/dashboard";
+    }
+
+    @GetMapping("/edit-asset/{id}")
+    public String editAsset(@PathVariable Long id, Model model) {
+        model.addAttribute("asset", assetService.getById(id));
+        return "admin/edit-asset";
+    }
+
+    @PostMapping("/update-asset")
+    public String updateAsset(@ModelAttribute Asset asset) {
+        assetService.update(asset);
+        return "redirect:/admin/dashboard";
+    }
+
     @GetMapping("/add-user")
     public String addUserPage(Model model) {
         model.addAttribute("user", new User());
         return "admin/add-user";
-    }
-    @GetMapping("/profile")
-    public String adminProfile() {
-        return "admin/profile";
     }
 
     @PostMapping("/add-user")
@@ -58,6 +77,7 @@ public class AdminController {
         userService.save(user);
         return "redirect:/admin/dashboard";
     }
+
     @GetMapping("/search-user")
     public String searchPage() {
         return "admin/search";
@@ -67,19 +87,19 @@ public class AdminController {
     public String searchUser(@RequestParam String userId, Model model) {
 
         User user = userService.findByEmployeeId(userId);
-
         model.addAttribute("user", user);
 
         return "admin/search";
     }
+
     @GetMapping("/issues")
     public String viewIssues(Model model) {
-
         model.addAttribute("issues", issueService.getAllIssues());
-
         return "admin/issues";
     }
 
+    @GetMapping("/profile")
+    public String adminProfile() {
+        return "admin/profile";
+    }
 }
-
-

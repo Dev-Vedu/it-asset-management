@@ -218,6 +218,7 @@
         <ul class="nav-links">
             <li><a href="/employee/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="/employee/report-issue"><i class="fas fa-exclamation-circle"></i> Report Issue</a></li>
+            <li><a href="/employee/my-issues">My Issues</a></li>
             <li><a href="/employee/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
@@ -251,11 +252,12 @@
                 </div>
                 <div class="stat-card">
                     <span>Issues Reported</span>
-                    <h3 style="color: var(--accent);">0</h3>
+                    <h3 style="color: var(--accent);" th:text="${totalIssues}">0</h3>
                 </div>
+
                 <div class="stat-card">
                     <span>Pending</span>
-                    <h3 style="color: #ef4444;">0</h3>
+                    <h3 style="color: #ef4444;" th:text="${pendingIssues}">0</h3>
                 </div>
             </section>
 
