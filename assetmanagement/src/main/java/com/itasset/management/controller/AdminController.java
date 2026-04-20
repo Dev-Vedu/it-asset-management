@@ -54,6 +54,7 @@ public class AdminController {
         return "redirect:/admin/dashboard";
     }
 
+
     @GetMapping("/edit-asset/{id}")
     public String editAsset(@PathVariable Long id, Model model) {
         model.addAttribute("asset", assetService.getById(id));
