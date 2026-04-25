@@ -43,7 +43,7 @@ html, body {
 
 .content-area {
     flex-grow: 1;
-    padding: 40px 50px;
+    padding: 10px 50px 40px 50px;
     overflow-y: auto;
 }
 
@@ -61,28 +61,21 @@ html, body {
     flex-shrink: 0;
 }
 
-.logo-area {
-    padding: 0 25px 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
+.logo-area { padding: 0 25px 20px; }
 .logo-placeholder {
-    width: 40px;
-    height: 40px;
-    background: var(--primary);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 .panel-title {
-    font-size: 20px;
-    font-weight: 800;
-}
-
+font-size: 20px; font-weight: 800; color: white;
+display:center;
+ }
 .nav-links {
     list-style: none;
     padding: 0;
@@ -113,19 +106,28 @@ html, body {
     color: white;
 }
 
+
 .sidebar-footer {
     margin-top: auto;
     padding: 20px 25px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-bottom:20px;
 }
 
-.logout-link {
-    color: #94a3b8;
-    text-decoration: none;
-    display: flex;
-    gap: 10px;
-    transition: 0.3s;
-}
-.logout-link:hover { color: #ef4444; }
+   .logout-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .logout-link:hover { color: #ef4444; }
+
 
 /* ==========================================================================
    4. TOP BAR & SEARCH

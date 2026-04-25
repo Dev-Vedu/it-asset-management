@@ -114,3 +114,79 @@ header h2 {
     font-weight: 700;
     cursor: pointer;
 }
+
+/* Header Gradient Variations */
+
+/* 1. Purple Gradient (Total Assets / Your Assets) */
+/* ==========================================================================
+   STATS GRID & CARDS
+   ========================================================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden; /* Important for the header color to stay inside corners */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Card Header (Gradient Bar) --- */
+.card-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+/* Color Variations using your requested #872bb1 */
+.stat-card.total .card-header {
+    background: linear-gradient(135deg, #621e82, #872bb1);
+}
+.stat-card.users .card-header {
+    background: linear-gradient(135deg, #872bb1, #a855f7);
+}
+.stat-card.issues .card-header {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.card-header span {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff; /* Explicitly white */
+}
+
+.card-header i {
+    font-size: 18px;
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+/* --- Card Content --- */
+.stat-card h3 {
+    margin: 20px 20px 5px;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.card-subtitle {
+    margin: 0 20px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
