@@ -5,7 +5,8 @@
    ========================================================================== */
 :root {
     --sidebar-bg: #0b0e14;
-    --primary: #6d28d9;
+    --primary: #7c3aed;
+    --primary-hover: #6d28d9;
     --accent: #a855f7;
     --bg-body: #ffffff;
     --text-main: #111827;
