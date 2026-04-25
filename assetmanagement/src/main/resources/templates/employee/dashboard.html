@@ -90,6 +90,35 @@
         }
         .logout-link:hover { color: #ef4444; }
 
+        /* --- UPDATED PROFILE CIRCLE --- */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+       .circle-profile {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(109, 40, 217, 0.2);
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+        }
+
+        .circle-profile:hover {
+             box-shadow: 0 6px 15px rgba(109, 40, 217, 0.3);
+        }
         /* --- MAIN CONTENT --- */
         .main-content {
             flex-grow: 1;
@@ -218,7 +247,7 @@
         <ul class="nav-links">
             <li><a href="/employee/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="/employee/report-issue"><i class="fas fa-exclamation-circle"></i> Report Issue</a></li>
-            <li><a href="/employee/my-issues" class="active"><i class="fas fa-list-ul"></i> My Issues</a></li>
+            <li><a href="/employee/my-issues"><i class="fas fa-list-ul"></i> My Issues</a></li>
             <li><a href="/employee/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
@@ -235,7 +264,14 @@
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" id="assetSearch" placeholder="Search my assets..." onkeyup="filterTable()">
                 </div>
-                <div class="user-profile-mini"></div>
+
+                <div class="profile-container">
+                    <div class="circle-profile"
+                         th:text="${user != null and user.name != null} ? ${#strings.substring(user.name, 0, 1)} : 'E'"
+                         title="View Profile">
+                        E
+                    </div>
+                </div>
             </div>
         </header>
 

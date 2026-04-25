@@ -5,142 +5,18 @@
     <title>Worker Dashboard | AssetPro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --sidebar-bg: #0b0e14;
-            --primary: #6d28d9;
-            --accent: #a855f7;
-            --bg-body: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border-color: #f3f4f6;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
-        }
-
-        .dashboard-container { display: flex; height: 100vh; width: 100vw; }
-
-        .sidebar {
-            width: 260px;
-            background: var(--sidebar-bg);
-            height: 100%;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 30px 0;
-            flex-shrink: 0;
-        }
-
-        .logo-area { padding: 0 25px 40px; }
-        .logo-placeholder {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .panel-title { font-size: 20px; font-weight: 800; color: white; }
-
-        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .nav-links li a {
-            color: #94a3b8;
-            text-decoration: none;
-            padding: 12px 25px;
-            margin: 4px 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-        }
-        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
-        .nav-links li a:hover { background: #252525; }
-
-        .sidebar-footer { margin-top: auto; padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .logout-link { color: #94a3b8; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; }
-        .logout-link:hover { color: #ef4444; }
-
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-
-        .top-bar {
-            height: 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 50px;
-            border-bottom: 1px solid var(--border-color);
-            background: #F3E8FF;
-            flex-shrink: 0;
-        }
-
-        .welcome-msg { font-weight: 700; font-size: 20px; }
-
-        .search-container { position: relative; width: 300px; }
-        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
-        .search-container input {
-            width: 100%;
-            padding: 12px 20px 12px 50px;
-            border-radius: 30px;
-            border: 1px solid var(--border-color);
-            background: #f9fafb;
-            outline: none;
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-
-        .content-area { flex-grow: 1; padding: 40px 50px; overflow-y: auto; }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 35px; }
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
-        }
-        .stat-card span { color: var(--text-muted); font-size: 13px; font-weight: 700; text-transform: uppercase; }
-        .stat-card h3 { margin: 10px 0 0; font-size: 36px; font-weight: 800; color: var(--primary); }
-
-        .table-card { background: white; border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04); }
-        .styled-table { width: 100%; border-collapse: collapse; }
-        .styled-table th { background: #fafafa; padding: 20px 25px; text-align: left; font-size: 13px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
-        .styled-table td { padding: 20px 25px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
-
-        .btn-resolve {
-            text-decoration: none;
-            color: white;
-            background: var(--primary);
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .badge-pending { background: #fef3c7; color: #d97706; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 12px; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/css/worker.css}">
 </head>
 <body>
 
 <div class="dashboard-container">
     <nav class="sidebar">
         <div class="logo-area">
-            <div class="logo-placeholder"><i class="fas fa-tools" style="color: white;"></i></div>
+            <div class="logo-placeholder"><i class="fas fa-chart-pie"></i> </div>
             <div class="panel-title">AssetPro</div>
         </div>
         <ul class="nav-links">
-            <li><a href="/worker/dashboard" class="active"><i class="fas fa-tasks"></i> Dashboard</a></li>
+            <li><a href="/worker/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="/worker/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
@@ -150,10 +26,19 @@
 
     <main class="main-content">
         <header class="top-bar">
-            <div class="welcome-msg">Worker Dashboard</div>
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="issueSearch" placeholder="Filter tasks..." onkeyup="filterTable()">
+            <div class="welcome-msg">Welcome, <span th:text="${workerName != null ? workerName : 'Worker'}">Maintenance Team</span>!</div>
+
+            <div class="top-bar-right">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="issueSearch" placeholder="Filter tasks..." onkeyup="filterTable()">
+                </div>
+
+                <div class="circle-profile"
+                     th:text="${workerName != null} ? ${workerName.substring(0,1)} : 'W'"
+                     title="My Profile">
+                    W
+                </div>
             </div>
         </header>
 
@@ -164,17 +49,31 @@
             </div>
 
             <section class="stats-grid">
-                <div class="stat-card">
-                    <span>Assigned</span>
+                <div class="stat-card assigned">
+                    <div class="card-header">
+                        <span>Assigned</span>
+                        <i class="fas fa-tasks"></i>
+                    </div>
                     <h3 th:text="${#lists.size(issues)}">0</h3>
+                    <p class="card-subtitle">Assigned Tasks</p>
                 </div>
-                <div class="stat-card">
-                    <span>In Progress</span>
-                    <h3 style="color: var(--accent);">0</h3>
+
+                <div class="stat-card progress">
+                    <div class="card-header">
+                        <span>In Progress</span>
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h3>0</h3>
+                    <p class="card-subtitle">Active Maintenance</p>
                 </div>
-                <div class="stat-card">
-                    <span>Resolved</span>
-                    <h3 style="color: #10b981;">0</h3>
+
+                <div class="stat-card resolved" style="">
+                    <div class="card-header">
+                        <span>Resolved</span>
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3 style="colour:#90EE90">0</h3>
+                    <p class="card-subtitle">Completed Tasks</p>
                 </div>
             </section>
 
