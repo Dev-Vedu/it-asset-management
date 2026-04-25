@@ -3,8 +3,8 @@
 
 :root {
     /* High-Contrast Palette */
-    --primary: #8b5cf6;
-    --primary-hover: #7c3aed;
+    --primary: #7c3aed;
+    --primary-hover: #6d28d9;
     --primary-glow: rgba(139, 92, 246, 0.2);
     --black: #000000;
     --sidebar-bg: #000000;
