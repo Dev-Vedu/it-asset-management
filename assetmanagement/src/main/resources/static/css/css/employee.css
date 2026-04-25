@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --primary: #7c3aed;           /* Vibrant Purple */
+    --primary: #7c3aed;
     --primary-hover: #6d28d9;
     --bg-main: #F3E8FF;           /* Soft Lavender Background */
     --sidebar-bg: #ffffff;        /* Clean White Sidebar */
