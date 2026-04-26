@@ -30,10 +30,10 @@ public class AdminController {
         // Assets
         model.addAttribute("assets", assetService.getAllAssets());
 
-        // ✅ COUNT USERS
+        //count user
         model.addAttribute("userCount", userService.getAllUsers().size());
 
-        // ✅ COUNT ISSUES
+        //count issue
         model.addAttribute("issueCount", issueService.getAllIssues().size());
 
         return "admin/dashboard";

@@ -35,7 +35,6 @@ public class WorkerController {
             model.addAttribute("issues",
                     issueService.getIssuesByType(user.getWorkerType()));
 
-            // ✅ FIX: Use SAME names as HTML
             model.addAttribute("inProgressCount",
                     issueService.countByStatusAndType("IN_PROGRESS", user.getWorkerType()));
 

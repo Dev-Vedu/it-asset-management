@@ -24,7 +24,6 @@ public class EmployeeController {
     @Autowired
     private IssueService issueService;
 
-    // ================= DASHBOARD =================
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
 
@@ -52,7 +51,6 @@ public class EmployeeController {
         return "employee/dashboard";
     }
 
-    // ================= REPORT ISSUE PAGE =================
     @GetMapping("/report-issue")
     public String reportIssuePage(HttpSession session, Model model) {
 
@@ -69,7 +67,6 @@ public class EmployeeController {
     }
 
 
-    // ================= SAVE ISSUE =================
     @PostMapping("/report-issue")
     public String reportIssue(@ModelAttribute Issue issue,
                               HttpSession session) {
@@ -90,7 +87,6 @@ public class EmployeeController {
 
 
 
-    // ================= MY ISSUES =================
     @GetMapping("/my-issues")
     public String myIssues(HttpSession session, Model model) {
 
@@ -107,7 +103,7 @@ public class EmployeeController {
         return "employee/my-issues";
     }
 
-    // ================= PROFILE =================
+
     @GetMapping("/profile")
     public String employeeProfile(HttpSession session, Model model) {
 
