@@ -176,14 +176,26 @@
                         <td th:text="${stat.count}" style="font-weight: 600; color: var(--text-muted);"></td>
                         <td th:text="${i.description}" style="font-weight: 600;"></td>
                         <td>
-                                <span th:if="${i.status == 'PENDING'}" class="badge status-pending">
-                                    <i class="fas fa-clock"></i> Pending
-                                </span>
+                            <!-- STATUS BADGE -->
+                            <span th:if="${i.status == 'PENDING'}" class="badge status-pending">
+        <i class="fas fa-clock"></i> Pending
+    </span>
+
                             <span th:if="${i.status == 'RESOLVED'}" class="badge status-resolved">
-                                    <i class="fas fa-check-circle"></i> Resolved
-                                </span>
-                            <span th:if="${i.status != 'PENDING' && i.status != 'RESOLVED'}" class="badge status-default" th:text="${i.status}"></span>
+        <i class="fas fa-check-circle"></i> Resolved
+    </span>
+
+                            <span th:if="${i.status != 'PENDING' && i.status != 'RESOLVED'}"
+                                  class="badge status-default"
+                                  th:text="${i.status}">
+    </span>
+
+                            <div style="margin-top:6px; font-size:13px; color:#6b7280;"><span th:text="${#strings.isEmpty(i.workerMessage) ? 'No update yet' : i.workerMessage}">
+</span>
+
+                            </div>
                         </td>
+
                     </tr>
 
                     <tr th:if="${#lists.isEmpty(issues)}">

@@ -34,10 +34,19 @@ public class WorkerController {
         } else {
             model.addAttribute("issues",
                     issueService.getIssuesByType(user.getWorkerType()));
+
+            // ✅ FIX: Use SAME names as HTML
+            model.addAttribute("inProgressCount",
+                    issueService.countByStatusAndType("IN_PROGRESS", user.getWorkerType()));
+
+            model.addAttribute("resolvedCount",
+                    issueService.countByStatusAndType("RESOLVED", user.getWorkerType()));
         }
 
         return "worker/dashboard";
     }
+
+
 
 
     @GetMapping("/update/{id}")
@@ -80,6 +89,23 @@ public class WorkerController {
 
         return "worker/issues";
     }
+    @PostMapping("/updateMessage/{id}")
+    public String updateMessage(@PathVariable Long id,
+                                @RequestParam("message") String message) {
+
+        Issue issue = issueService.getIssueById(id);
+
+        if (issue != null) {
+            issue.setWorkerMessage(message);
+            issueService.save(issue);
+        }
+
+        return "redirect:/worker/dashboard";
+    }
+
+
+
+
 
 
 

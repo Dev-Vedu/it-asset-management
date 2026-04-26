@@ -20,6 +20,10 @@ public class AssetService {
         return assetRepository.findByAssignedTo(userId);
     }
 
+    public Asset getAssetById(Long id) {
+        return assetRepository.findById(id).orElse(null);
+    }
+
     public List<Asset> getAllAssets() {
         return assetRepository.findAll();
     }

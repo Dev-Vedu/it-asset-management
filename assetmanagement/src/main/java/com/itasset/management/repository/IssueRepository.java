@@ -11,6 +11,9 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     List<Issue> findByWorker(User worker);
     List<Issue> findByEmployee_Id(Long id);
+    long countByStatusAndType(String status, String type);
+
+    long countByStatusIgnoreCase(String status);
 
 
 }

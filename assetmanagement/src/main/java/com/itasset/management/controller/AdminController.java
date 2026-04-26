@@ -26,9 +26,20 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
+
+        // Assets
         model.addAttribute("assets", assetService.getAllAssets());
+
+        // ✅ COUNT USERS
+        model.addAttribute("userCount", userService.getAllUsers().size());
+
+        // ✅ COUNT ISSUES
+        model.addAttribute("issueCount", issueService.getAllIssues().size());
+
         return "admin/dashboard";
     }
+
+
 
     @GetMapping("/add-asset")
     public String addAssetPage(Model model) {

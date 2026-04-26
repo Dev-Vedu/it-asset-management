@@ -24,6 +24,7 @@ public class EmployeeController {
     @Autowired
     private IssueService issueService;
 
+    // ================= DASHBOARD =================
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
 
@@ -51,13 +52,24 @@ public class EmployeeController {
         return "employee/dashboard";
     }
 
-
+    // ================= REPORT ISSUE PAGE =================
     @GetMapping("/report-issue")
-    public String reportIssuePage(Model model) {
+    public String reportIssuePage(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            return "redirect:/";
+        }
+
         model.addAttribute("issue", new Issue());
+
+
         return "employee/report-issue";
     }
 
+
+    // ================= SAVE ISSUE =================
     @PostMapping("/report-issue")
     public String reportIssue(@ModelAttribute Issue issue,
                               HttpSession session) {
@@ -76,6 +88,9 @@ public class EmployeeController {
         return "redirect:/employee/dashboard";
     }
 
+
+
+    // ================= MY ISSUES =================
     @GetMapping("/my-issues")
     public String myIssues(HttpSession session, Model model) {
 
@@ -92,6 +107,7 @@ public class EmployeeController {
         return "employee/my-issues";
     }
 
+    // ================= PROFILE =================
     @GetMapping("/profile")
     public String employeeProfile(HttpSession session, Model model) {
 
