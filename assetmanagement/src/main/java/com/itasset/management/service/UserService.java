@@ -34,4 +34,14 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+    public User getById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+    public List<User> getUsersByRole(String role) {
+        return userRepository.findByRole(role);
+    }
+
 }

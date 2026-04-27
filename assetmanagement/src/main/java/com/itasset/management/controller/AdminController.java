@@ -114,4 +114,53 @@ public class AdminController {
     public String adminProfile() {
         return "admin/profile";
     }
+
+    @GetMapping("/view-users")
+    public String viewUsers(Model model) {
+
+        model.addAttribute("employees",
+                userService.getUsersByRole("EMPLOYEE"));
+
+        model.addAttribute("workers",
+                userService.getUsersByRole("WORKER"));
+
+        return "admin/view-users";
+    }
+
+
+    @GetMapping("/edit-user/{id}")
+    public String editUser(@PathVariable Long id, Model model) {
+
+        model.addAttribute("user", userService.getById(id));
+
+        return "admin/edit-user";
+    }
+
+    @PostMapping("/update-user")
+    public String updateUser(@ModelAttribute User user) {
+
+        userService.save(user);
+
+        return "redirect:/admin/view-users";
+    }
+
+    @GetMapping("/toggle-user/{id}")
+    public String toggleUser(@PathVariable Long id) {
+
+        User user = userService.getById(id);
+
+        user.setActive(!user.isActive());
+
+        userService.save(user);
+
+        return "redirect:/admin/view-users";
+    }
+    @GetMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable Long id) {
+
+        userService.deleteById(id);
+
+        return "redirect:/admin/view-users";
+    }
+
 }
