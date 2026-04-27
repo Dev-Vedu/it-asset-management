@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AssetPro | Enterprise Management System</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -30,7 +31,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 20px 5% 20px 25px;
+
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(15px);
             position: sticky;
@@ -107,17 +109,55 @@
         .role-card i { font-size: 40px; margin-bottom: 20px; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .footer { padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.8rem; }
+        /* Unique Brand Typography */
+.brand-name {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -1.2px;
+    background: linear-gradient(135deg, #ffffff 40%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* Matching the Hero Primary color to your brand purple */
+:root {
+    --primary: #872bb1; /* Updated to match your logo purple */
+    --accent: #a855f7;
+    --bg-void: #000000;
+    --gradient-primary: linear-gradient(135deg, #872bb1 0%, #a855f7 100%);
+}
+
+/* Glow effect for the hero icon to make it look high-tech */
+.ph-cube {
+    filter: drop-shadow(0 0 30px rgba(135, 43, 177, 0.2));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Refined Hero text */
+.hero-text h1 {
+    letter-spacing: -2px;
+}
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="logo">ASSETS</div>
+    <div class="brand-unit">
+        <div class="brand-main" style="display: flex; align-items: center;">
+            <i class="fa-solid fa-box-open" style="color: #ffffff; margin-right: 10px; font-size: 22px;"></i>
+            <span class="brand-name">AssetCentral</span>
+        </div>
+    </div>
     <div class="nav-actions">
         <a th:href="@{/login}" class="btn btn-primary" style="padding: 10px 24px;">Sign In</a>
     </div>
 </nav>
-
 <section class="hero">
     <div class="hero-text">
         <h1>Asset <br><span style="color: var(--primary)">Management.</span></h1>

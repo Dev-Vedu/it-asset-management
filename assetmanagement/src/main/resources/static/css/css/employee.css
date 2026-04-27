@@ -190,3 +190,60 @@ header h2 {
     color: var(--text-muted);
     font-weight: 500;
 }
+/* Container for the whole logo section */
+.logo-area {
+    padding: 25px 25px 15px 25px;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-content {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    /* The Gradient Magic */
+    background: linear-gradient(135deg, #ffffff 30%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-icon {
+    margin-right: 10px;
+    font-size: 22px;
+    /* Ensures the icon also takes the gradient */
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-text {
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    margin-bottom: 10px;
+}
+
+/* Subtitle "Admin Panel" Styles */
+.panel-subtitle-container {
+    font-size: 15px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.line-accent {
+    width: 20px;
+    height: 1px;
+    background: #7c3aed;
+}
+
+.subtitle-text {
+    white-space: nowrap;
+}

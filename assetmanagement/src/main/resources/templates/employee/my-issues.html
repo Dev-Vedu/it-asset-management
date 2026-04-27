@@ -30,8 +30,12 @@
         /* --- SIDEBAR --- */
         .sidebar {
             width: 260px; background: var(--sidebar-bg);
-            height: 100%; color: white; display: flex;
-            flex-direction: column; padding: 30px 0; flex-shrink: 0;
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding:  0;
+            flex-shrink: 0;
         }
 
         .logo-area { padding: 0 25px 40px; }
@@ -59,9 +63,14 @@
         }
 
         .top-bar {
-            height: 80px; display: flex; justify-content: space-between;
-            align-items: center; padding: 0 50px;
-            border-bottom: 1px solid var(--border-color); background: white;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
         }
 
         .content-area { padding: 50px; }
@@ -111,9 +120,9 @@
 
         .sidebar-footer {
             margin-top: auto;
-            padding: 20px 25px;
+            padding: 10px 10px;
             border-top: 1px solid rgba(255,255,255,0.05);
-            margin-bottom:20px; }
+            }
 
         .logout-link {
             color: #94a3b8;
@@ -128,7 +137,63 @@
             transition: 0.3s;
         }
         .logout-link:hover { color: #ef4444; }
+/* Container for the whole logo section */
+.logo-area {
+    padding: 25px 25px 15px 25px;
+}
 
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-content {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    /* The Gradient Magic */
+    background: linear-gradient(135deg, #ffffff 30%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-icon {
+    margin-right: 10px;
+    font-size: 22px;
+    /* Ensures the icon also takes the gradient */
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-text {
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    margin-bottom: 10px;
+}
+
+/* Subtitle "Admin Panel" Styles */
+.panel-subtitle-container {
+    font-size: 15px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.line-accent {
+    width: 20px;
+    height: 1px;
+    background: #7c3aed;
+}
+
+.subtitle-text {
+    white-space: nowrap;
+}
     </style>
 </head>
 <body>
@@ -136,8 +201,18 @@
 <div class="dashboard-container">
     <nav class="sidebar">
         <div class="logo-area">
-            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
-            <div class="panel-title">AssetPro</div>
+            <div class="brand-container">
+                <div class="brand-content">
+                    <i class="fa-solid fa-box-open brand-icon"></i>
+                    <span class="brand-text">AssetCentral</span>
+                </div>
+            </div>
+
+            <div class="panel-subtitle-container">
+                <span class="line-accent"></span>
+                <span class="subtitle-text">Employee Panel</span>
+                <span class="line-accent"></span>
+            </div>
         </div>
         <ul class="nav-links">
             <li><a href="/employee/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
