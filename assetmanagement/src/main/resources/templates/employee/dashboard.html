@@ -328,9 +328,11 @@
 
                 <div class="profile-container">
                     <div class="circle-profile"
-                         th:text="${user != null and user.name != null} ? ${#strings.substring(user.name, 0, 1)} : 'E'"
-                         title="View Profile">
-                        E
+                         th:text="${user != null and user.name != null} ? ${user.name.substring(0,1)} : 'E'"
+                         title="View Profile"
+                         onclick="window.location.href='/employee/profile'"
+                         style="cursor:pointer;">
+                        A
                     </div>
                 </div>
             </div>

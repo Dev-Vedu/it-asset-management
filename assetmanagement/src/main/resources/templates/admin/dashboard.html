@@ -8,11 +8,15 @@
     <link rel="stylesheet" th:href="@{/css/css/admin/admin.css}">
 </head>
 
+
 <body>
 <div class="dashboard-container">
     <nav class="sidebar">
         <div class="logo-area">
-            <div class="logo-placeholder"><i class="fas fa-cube" style="color: white;"></i></div>
+            <div style="display:flex;">
+                <div class="logo-placeholder"><i class="fa-regular fa-cube" style="color: white;"></i></div>
+                <div class="logo-name">AssetCentral</div>
+            </div>
             <div class="panel-title" >Admin Panel</div>
         </div>
         <ul class="nav-links">
@@ -41,7 +45,9 @@
 
                 <div class="circle-profile"
                      th:text="${user != null and user.name != null} ? ${user.name.substring(0,1)} : 'A'"
-                     title="View Profile">
+                     title="View Profile"
+                     onclick="window.location.href='/admin/profile'"
+                     style="cursor:pointer;">
                     A
                 </div>
             </div>
@@ -67,7 +73,7 @@
                     <h3 th:text="${userCount}">0</h3>
                     <p class="card-subtitle">Active accounts</p>
                 </div>
-
+<!--
                 <div class="stat-card issues">
                     <div class="card-header">
                         <span>Open Issues</span>
@@ -75,24 +81,24 @@
                     </div>
                     <h3 th:text="${userCount}">0</h3>
                     <p class="card-subtitle">Requiring attention</p>
-                </div>
+                </div>-->
             </section>
             <div class="table-card">
                 <table class="styled-table">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Serial</th>
-                        <th>Assigned To</th>
-                        <th>Action</th>
+                        <th>ASSET NAME</th>
+                        <th>USER ID</th>
+                        <th>ASSIGNED TO</th>
+                        <th>ACTION</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="a, stat : ${assets}">
                         <td th:text="${stat.count}" style="color: var(--text-muted); font-weight: 600;"></td>
                         <td th:text="${a.name}" style="font-weight: 700;"></td>
-                        <td th:text="${a.serialNumber}" style="font-family: monospace; color: var(--text-muted);"></td>
+                        <td th:text="${a.serialNumber}" style="font-family: monospace; color: var(--text-muted);font-weight: bold;font-size:16px;"></td>
                         <td><span class="badge" th:text="${a.assignedTo}"></span></td>
                         <td>
                             <a th:href="@{'/admin/edit-asset/' + ${a.id}}" class="action-btn edit-btn">

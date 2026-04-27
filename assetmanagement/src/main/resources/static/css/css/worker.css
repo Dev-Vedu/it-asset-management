@@ -389,3 +389,104 @@ html, body {
     color: var(--text-muted);
     font-weight: 500;
 }
+
+/* --- Update Column Styling --- */
+
+/* Container for the form to keep input and button aligned */
+.update-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+/* Styled Input Field */
+.update-input {
+    padding: 10px 14px;
+    border: 1.5px solid #e5e7eb; /* Soft light gray border */
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 180px;
+    color: var(--text-main);
+    background-color: #f9fafb;
+}
+
+/* Glow and border color change on click/focus */
+.update-input:focus {
+    border-color: #872bb1;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(135, 43, 177, 0.1);
+}
+
+/* Styled Send Button */
+.btn-send {
+    background-color: #872bb1;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button Hover State */
+.btn-send:hover {
+    background-color: #6d2291; /* Slightly darker purple */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(135, 43, 177, 0.25);
+}
+
+/* Button Press State */
+.btn-send:active {
+    transform: translateY(0);
+}
+
+/* Styling the Status Badge inside the table to look better */
+.badge-pending {
+    background: #fff7ed;
+    color: #c2410c;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    border: 1px solid #ffedd5;
+}
+
+
+/* --- Dynamic Status Badges --- */
+
+/* Pending / High Alert (Red/Orange) */
+.badge-pending {
+    background-color: #fef2f2; /* Very light red */
+    color: #dc2626;            /* Strong red */
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid #fee2e2;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+/* Resolved / Success (Green) */
+.badge-resolved {
+    background-color: #f0fdf4; /* Very light green */
+    color: #16a34a;            /* Strong green */
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid #dcfce7;
+    text-transform: uppercase;
+    display: inline-block;
+}

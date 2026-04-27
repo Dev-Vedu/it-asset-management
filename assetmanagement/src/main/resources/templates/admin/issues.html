@@ -161,6 +161,7 @@
             border-bottom: 1px solid var(--border-color);
             font-size: 14px;
             color: var(--text-main);
+            font-weight: bold;
         }
 
         .styled-table tr:last-child td { border-bottom: none; }
@@ -205,6 +206,37 @@
             transform: translateY(-50%);
             color: var(--text-muted);
         }
+
+    /* --- Unified Status Badges --- */
+
+.badge-pending,
+.badge-resolved {
+    /* Make them consistent sizes */
+    min-width: 90px;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+/* RED Style for Pending/Active */
+.badge-pending {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+    border: 1px solid #fecaca !important;
+}
+
+/* GREEN Style for Resolved */
+.badge-resolved {
+    background-color: #dcfce7 !important;
+    color: #15803d !important;
+    border: 1px solid #bbf7d0 !important;
+}
+
 
     </style>
 </head>
@@ -266,9 +298,14 @@
                         <tr>
                             <td style="font-weight: 600; color: var(--primary);" th:text="'#' + ${i.id}">#1</td>
                             <td style="font-weight: 700; max-width: 300px;" th:text="${i.description}">Issue Description</td>
-                            <td th:text="${i.userId}">101</td>
+                            <td  th:text="${i.employee.employeeId}">EMP101</td>
                             <td><span class="badge badge-type" th:text="${i.type}">HARDWARE</span></td>
-                            <td><span class="badge badge-status" th:text="${i.status}">PENDING</span></td>
+                            <td>
+                                <span th:text="${i.status}"
+                                th:class="${i.status != null && i.status.toLowerCase() == 'resolved' ? 'badge-resolved' : 'badge-pending'}">
+                                    PENDING
+                                </span>
+                            </td>
                         </tr>
                     </li>
                     </tbody>

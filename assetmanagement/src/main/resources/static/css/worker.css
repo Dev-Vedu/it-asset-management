@@ -115,3 +115,30 @@ header p { color: var(--text-muted); }
     border-radius: 10px;
     font-weight: 800;
 }
+/* --- Dynamic Status Badges --- */
+
+/* Pending / High Alert (Red/Orange) */
+.badge-pending {
+    background-color: #fef2f2; /* Very light red */
+    color: #dc2626;            /* Strong red */
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid #fee2e2;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+/* Resolved / Success (Green) */
+.badge-resolved {
+    background-color: #f0fdf4; /* Very light green */
+    color: #16a34a;            /* Strong green */
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid #dcfce7;
+    text-transform: uppercase;
+    display: inline-block;
+}
