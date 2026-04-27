@@ -19,6 +19,7 @@ public class User {
 
     private String workerType; // HARDWARE / NETWORK / SOFTWARE
 
+    private boolean active = true;
 
     // Default Constructor
     public User() {
@@ -33,6 +34,14 @@ public class User {
         this.role = role;
         this.employeeId = employeeId;
         this.workerType = workerType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 
