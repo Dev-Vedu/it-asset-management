@@ -278,6 +278,216 @@
     white-space: nowrap;
 }
 
+/* --- CLEAN RESPONSIVE FIX --- */
+@media (max-width: 900px) {
+    html, body {
+        overflow: auto; /* Allow scrolling on the whole page */
+        height: auto;
+    }
+
+    .dashboard-container {
+        flex-direction: column; /* Stack sidebar on top of content */
+        height: auto;
+    }
+
+    /* 1. Sidebar becomes a compact header */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px 0 0 0;
+    }
+
+    .logo-area {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* 2. Make the menu a clean, scrollable row */
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none; /* Hide ugly scrollbar */
+    }
+
+    .nav-links li a {
+        margin: 0 5px;
+        padding: 8px 15px;
+        font-size: 13px;
+        white-space: nowrap; /* Prevent text wrapping */
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-footer, .panel-subtitle-container {
+        display: none; /* Remove clutter */
+    }
+
+    /* 3. Adjust Main Content Area */
+    .main-content {
+        height: auto;
+        overflow: visible;
+    }
+
+    .top-bar {
+        padding: 0 20px;
+        height: 60px;
+        justify-content: center; /* Center the title */
+    }
+
+    .page-title {
+        font-size: 16px;
+    }
+
+    /* 4. Fix the Form Card */
+    .content-area {
+        padding: 20px 15px; /* Get rid of the 50px gaps */
+    }
+
+    .form-card {
+        padding: 25px 20px;
+        max-width: 100%; /* Use full width on mobile */
+        border-radius: 16px;
+        box-shadow: none; /* Flat look is cleaner on small screens */
+    }
+
+    .form-card h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .form-card p {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-submit {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+        @media (max-width: 768px) {
+    /* 1. Reset Body for scrolling */
+    html, body {
+        overflow: auto;
+        height: auto;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    /* 2. Sidebar transforms into a Fixed Bottom Nav */
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        z-index: 1000;
+        flex-direction: row;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 0;
+    }
+
+    /* Hide logo and footer on mobile nav */
+    .logo-area, .sidebar-footer, .panel-subtitle-container {
+        display: none;
+    }
+
+    /* 3. Horizontal Nav Links */
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+
+    .nav-links li {
+        flex: 1;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        flex-direction: column; /* Icon over text */
+        gap: 4px;
+        padding: 8px 0;
+        margin: 0;
+        font-size: 10px; /* Micro-text for icons */
+        background: none !important;
+        border: none !important;
+    }
+
+    .nav-links li a i {
+        font-size: 18px;
+    }
+
+    /* 4. Main Content Adjustments */
+    .main-content {
+        padding-bottom: 80px; /* Space for bottom nav */
+        height: auto;
+    }
+
+    .top-bar {
+        padding: 0 20px;
+        height: 60px;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    /* 5. The Form Card: Edge-to-Edge feel */
+    .content-area {
+        padding: 15px;
+    }
+
+    .form-card {
+        padding: 25px 20px;
+        border-radius: 20px;
+        max-width: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .form-card h2 {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        padding: 12px; /* Slightly smaller for mobile */
+        font-size: 16px; /* Prevents iOS zoom-on-focus */
+    }
+}
+        /* Improve Input Focus & Visibility */
+.form-group input, .form-group select {
+    border: 1px solid #e2e8f0; /* Slightly darker than your current light grey */
+    background: #ffffff;
+}
+
+.form-group input:focus {
+    border-color: #6d28d9;
+    box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15);
+}
+
+/* Sidebar Active State Glow */
+.nav-links li a.active {
+    background: linear-gradient(90deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0) 100%);
+    border-left: 4px solid #6d28d9;
+    color: #ffffff;
+}
+
+/* Add a bit of space to the Main Content */
+.content-area {
+    display: flex;
+    align-items: center; /* This centers the card vertically */
+    min-height: calc(100vh - 80px);
+}
     </style>
 </head>
 <body>
@@ -299,9 +509,9 @@
             </div>
         </div>
         <ul class="nav-links">
-            <li><a href="/admin/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
-            <li><a href="/admin/add-asset" class="active"><i class="fas fa-plus"></i> Add Asset</a></li>
-            <!--<li><a href="/admin/assets" ><i class="fas fa-box"></i> Manage Assets</a></li>-->
+            <li><a href="/admin/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
+            <!--<li><a href="/admin/assets"><i class="fas fa-box"></i> Manage Assets</a></li>-->
             <li><a href="/admin/view-users"><i class="fas fa-users"></i> View Users</a></li>
             <li><a href="/admin/add-user"><i class="fas fa-user-plus"></i> Add User</a></li>
             <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>

@@ -211,6 +211,75 @@
         font-size: 18px;
     }
 }
+        /* Responsive Styles */
+@media (max-width: 800px) {
+    body {
+        /* Allow scrolling on short mobile screens */
+        height: auto;
+        padding: 40px 0;
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 92%;
+        height: auto;
+        flex-direction: column; /* Stack left and right panels */
+        margin-top: 60px; /* Space for the brand overlay */
+    }
+
+    .left {
+        padding: 40px 30px;
+        clip-path: none; /* Remove the slant for mobile */
+        text-align: center;
+        align-items: center;
+    }
+
+    .left h1 {
+        font-size: 32px;
+    }
+
+    .left p {
+        max-width: 100%;
+    }
+
+    .right {
+        padding: 40px 30px;
+    }
+
+    .right h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Center the purple underline on mobile */
+    .right h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .page-brand-overlay {
+        top: 20px;
+        left: 0;
+        right: 0;
+        justify-content: center; /* Center logo on mobile */
+    }
+
+    .page-brand-overlay span {
+        font-size: 18px;
+    }
+}
+
+/* Extra small devices (Phones under 400px) */
+@media (max-width: 400px) {
+    .left h1 {
+        font-size: 28px;
+    }
+
+    .right {
+        padding: 30px 20px;
+    }
+}
+
     </style>
 </head>
 
