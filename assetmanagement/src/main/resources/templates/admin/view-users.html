@@ -43,7 +43,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .brand-icon { margin-right: 10px; font-size: 22px; -webkit-text-fill-color: transparent; }
-        .brand-text { font-weight: 800; letter-spacing: -1.2px; }
+        .brand-text { font-weight: 800; letter-spacing: -1.2px; margin-bottom:10px }
 
         .panel-subtitle-container {
             font-size: 11px; font-weight: 700; color: #94a3b8;
@@ -52,31 +52,69 @@
         }
         .line-accent { width: 15px; height: 1px; background: #7c3aed; }
 
-        .nav-links { list-style: none; padding: 0; margin: 20px 0; flex-grow: 1; }
+        .nav-links { list-style: none; padding: 0; margin:  0; flex-grow: 1; }
         .nav-links li a {
             color: #94a3b8; text-decoration: none;
             padding: 12px 25px; margin: 4px 15px;
             display: flex; align-items: center; gap: 12px;
             border-radius: 12px; font-weight: 600; transition: 0.3s;
         }
-        .nav-links li a:hover, .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-links li a:hover{ background: #252525; color: white; }
+        .nav-links li a.active {
+            background: linear-gradient(90deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0) 100%);
+            border-left: 4px solid #6d28d9;
+            color: #ffffff;
+        }
 
-        .sidebar-footer { padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .logout-link { color: #94a3b8; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .logout-link:hover { color: var(--danger); }
 
+        /* --- SIDEBAR FOOTER / LOGOUT --- */
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px 25px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.logout-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.logout-link:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.08);
+}
         /* --- MAIN CONTENT --- */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
         .top-bar {
-            height: 80px; display: flex; justify-content: space-between;
-            align-items: center; padding: 0 50px;
-            border-bottom: 1px solid var(--border-color); background: white;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
         }
 
         .content-area { flex-grow: 1; padding: 40px 50px; overflow-y: auto; }
 
         .table-card {
-            background: white; border-radius: 24px;
+            background: white;
+            border-radius: 24px;
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 25px rgba(0,0,0,0.02);
             overflow: hidden; margin-bottom: 40px;
@@ -120,12 +158,15 @@
             <div class="brand-container">
                 <div class="brand-content">
                     <i class="fa-solid fa-box-open brand-icon"></i>
-                    <span class="brand-text">AssetCentral</span>
+                    <span class="brand-text">
+                        AssetCentral
+                    </span>
                 </div>
             </div>
-            <div class="panel-subtitle-container">
-                <span class="line-accent"></span>
-                <span class="subtitle-text" style="font-size: 15px;font-weight: 700;">Admin Panel</span>
+            <div style="font-size: 15px;font-weight: 700;color: #94a3b8;text-transform: uppercase;letter-spacing: 3px;margin-top: 13px;display: flex;align-items: center;gap: 10px;opacity: 0.8;">
+                <span style="width: 20px; height: 1px; background: #7c3aed;"></span>
+                Admin Panel
+                <span style="width: 20px; height: 1px; background: #7c3aed;"></span>
             </div>
         </div>
         <ul class="nav-links">
@@ -138,7 +179,7 @@
             <li><a href="/admin/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
-            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="/login" class="logout-link" ><i class="fas fa-sign-out-alt" style="margin:0"></i> Logout</a>
         </div>
     </nav>
 

@@ -73,11 +73,16 @@
         }
 
         .nav-links li a:hover { background: #252525; color: white; }
-        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-links li a.active {
+    background: linear-gradient(90deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0) 100%);
+    border-left: 4px solid #6d28d9;
+    color: #ffffff;
+}
+
 
 .sidebar-footer {
     margin-top: auto;
-    padding: 10px 10px;
+    padding: 20px 25px;
     border-top: 1px solid rgba(255,255,255,0.05);
 
 }
@@ -95,7 +100,7 @@
             border-radius: 8px;
             transition: 0.3s;
         }
-        .logout-link:hover { color: #ef4444; }
+        .logout-link:hover { color: #ef4444;background: rgba(239, 68, 68, 0.08); }
 
 
         /* --- MAIN CONTENT --- */

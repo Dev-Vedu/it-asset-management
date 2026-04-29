@@ -105,6 +105,36 @@
     text-transform: uppercase !important;
     display: inline-block !important;
 }
+        .panel-title { font-size: 20px; font-weight: 800; color: white; }
+        .panel-subtitle-container {
+    font-size: 15px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.line-accent {
+    width: 20px;
+    height: 1px;
+    background: #7c3aed;
+}
+
+.subtitle-text {
+    white-space: nowrap;
+}
+         .nav-links li a.active {
+    background: linear-gradient(90deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0) 100%);
+    border-left: 4px solid #6d28d9;
+    color: #ffffff;
+}
+
+
     </style>
 </head>
 <body>
@@ -125,10 +155,10 @@
                 </div>
             </div>
 
-            <div style="font-size: 15px;font-weight: 700;color: #94a3b8;text-transform: uppercase;letter-spacing: 3px;margin-top: 13px;display: flex;align-items: center;gap: 10px;opacity: 0.8;">
-                <span style="width: 20px; height: 1px; background: #7c3aed;"></span>
-                Worker Panel
-                <span style="width: 20px; height: 1px; background: #7c3aed;"></span>
+            <div class="panel-subtitle-container">
+                <span class="line-accent"></span>
+                <span class="subtitle-text">Worker Panel</span>
+                <span class="line-accent"></span>
             </div>
         </div>
         <ul class="nav-links">

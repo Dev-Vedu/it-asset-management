@@ -74,7 +74,11 @@
         }
 
         .nav-links li a:hover { background: #252525; color: white; }
-        .nav-links li a.active { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-links li a.active {
+    background: linear-gradient(90deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0) 100%);
+    border-left: 4px solid #6d28d9;
+    color: #ffffff;
+}
 
 .sidebar-footer {
     margin-top: auto;
@@ -315,17 +319,17 @@
             </div>
         </div>
         <ul class="nav-links">
-            <li><a href="/admin/dashboard" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/admin/dashboard" ><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="/admin/add-asset"><i class="fas fa-plus"></i> Add Asset</a></li>
             <!--<li><a href="/admin/assets"><i class="fas fa-box"></i> Manage Assets</a></li>-->
             <li><a href="/admin/view-users"><i class="fas fa-users"></i> View Users</a></li>
             <li><a href="/admin/add-user"><i class="fas fa-user-plus"></i> Add User</a></li>
             <li><a href="/admin/search-user"><i class="fas fa-search"></i> Search User</a></li>
-            <li><a href="/admin/issues"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
+            <li><a href="/admin/issues" class="active"><i class="fas fa-ticket-alt"></i> View Issues</a></li>
             <li><a href="/admin/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
         </ul>
         <div class="sidebar-footer">
-            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Logout</a>
+            <a href="/login" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
 
